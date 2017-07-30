@@ -1,5 +1,7 @@
 # ![logo](https://rawgit.com/philippnormann/security-belt/master/public/logo.svg) Security Belt
 
+[![Build Status](https://travis-ci.org/philippnormann/security-belt.svg?branch=master)](https://travis-ci.org/philippnormann/security-belt)
+
 A framework for improving the IT-Security of your teams through gamification.
 It allows teams to self-asses their security level and rewards them with security belts (from yellow through black). It also ranks the teams by the amount of aquired skills.
 
