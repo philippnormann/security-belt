@@ -21,7 +21,8 @@
     "lint:js": "./node_modules/.bin/eslint *.js assets/js/*.js lib/*.js bin/www test/*.js migrations/*.js",
     "lint:yaml": "./node_modules/.bin/yamllint config/skills/**/*.yml",
     "lint": "npm run lint:js && npm run lint:yaml",
-    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test:nolint": "./node_modules/.bin/mocha --reporter spec",
+    "test": "npm run lint && npm run test:nolint",
     "prestart": "./migration-runner.js",
     "start": "./bin/www",
     "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm"
