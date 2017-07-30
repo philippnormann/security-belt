@@ -1,0 +1,30 @@
+doctype html
+html(class='mdc-typography')
+  head
+    title= title
+    meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
+    link(rel='stylesheet' type='text/css' href='/style.css')
+
+  body(class='mdc-theme--background')
+    header(class='mdc-toolbar mdc-toolbar--fixed')
+      div(class='mdc-toolbar__row toolbar-nav')
+
+        section(class='mdc-toolbar__section mdc-toolbar__section--align-start')
+          a(href='/')
+            h1(class='mdc-toolbar__title') Security Belt
+        section(class='mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-end')
+          nav(class='mdc-tab-bar' data-mdc-auto-init='MDCTabBar')
+            - var items = { teams : 'Teams', leaderboard: 'Leaderboard'}
+            for item, path in items
+              if (item == title)
+                a(class='mdc-tab mdc-tab--active' href='/' + path)= item
+              else
+                a(class='mdc-tab' href='/' + path)= item
+            span(class='mdc-tab-bar__indicator')
+
+
+    div(class='page__content')
+      block content
+
+    script(src='/app.bundle.js')

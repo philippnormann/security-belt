@@ -1,0 +1,35 @@
+extends layout
+
+block content
+
+  section(class='mdc-layout-grid')
+    div(class='mdc-layout-grid__inner')
+    
+      div(class='center mdc-layout-grid__cell--span-12')
+        h1(class='mdc-typography--display3 mdc-theme--accent')
+          img(class='logo' src='/logo.svg' alt='logo')
+          span= title
+        h5(class='mdc-typography--headline') A framework for improving the IT-Security of your teams
+        a(href='/teams')
+          button(class='mdc-button mdc-button--raised mdc-button--accent' data-mdc-auto-init='MDCRipple') view teams
+
+  section(class='mdc-layout-grid')
+    div(class='mdc-layout-grid__inner')
+
+      div(class='center mdc-layout-grid__cell')
+        i(class='material-icons md-48 mdc-theme--primary') help
+        h5(class='mdc-typography--title') Why?
+        p It helps to achieve a higher level of transparency about the security status of the teams.
+        p Additionally teams can compare eachother und can see which teams have fulfilled which skills in order to get help. 
+      
+      div(class='center mdc-layout-grid__cell')
+        i(class='material-icons md-48 mdc-theme--primary') library_add
+        h5(class='mdc-typography--title') How?
+        p Skills can be marked as fulfilled by clicking on them. (Please only do this for your own team)
+        p The belt color changes automatically according to the fulfilled skills.
+       
+      div(class='center mdc-layout-grid__cell')
+        i(class='material-icons md-48 mdc-theme--primary') call_merge
+        h5(class='mdc-typography--title') Contribute
+        p The whole content is available on #[a(href='https://github.com/philippnormann/security-belt') GitHub] and we are happy about PRs!
+        p Especially the content of the skills can be complemented with your experience.

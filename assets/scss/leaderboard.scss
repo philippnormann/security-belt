@@ -1,0 +1,33 @@
+.mdc-list {
+  @include mdc-elevation(2);
+}
+
+.mdc-list-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mdc-list--avatar-list .mdc-list-item__start-detail {
+  @include mdc-elevation(1);
+  line-height: 40px;
+}
+
+.mdc-list--avatar-list .mdc-list-item__start-detail:before {
+  content: '\00a0';
+}
+.mdc-list--avatar-list .mdc-list-item__start-detail:after {
+  content: '.';
+}
+
+.mdc-list-item__end-detail {
+  @include mdc-elevation(1);
+  padding: 4px 12px;
+  width: auto;
+  height: auto;
+  background: $mdc-theme-accent;
+  border-radius: 3px;
+}
+
+.mdc-list--avatar-list .mdc-list-item__end-detail:after {
+  content: ' Skills';
+}

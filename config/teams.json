@@ -1,0 +1,25 @@
+{
+  "teams": [
+    {
+      "name": "Team 1",
+      "champion": {
+        "name": "Chuck Norris",
+        "email": "chuck.norris@example.com"
+      }
+    },
+    {
+     "name": "Team 2",
+     "champion": {
+        "name": "Bruce Schneier",
+        "email": "bruce.schneier@example.com"
+     }
+    },
+    {
+     "name": "Operations",
+     "champion": {
+        "name": "Ernie",
+        "email": "ernie@example.com"
+     }
+    }
+  ]
+}

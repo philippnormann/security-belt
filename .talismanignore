@@ -1,0 +1,4 @@
+.DS_STORE
+config/skills/
+test/bad-skills/
+test/good-skills/

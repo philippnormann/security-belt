@@ -1,0 +1,56 @@
+$mdc-theme-primary: #3F51B5;
+$mdc-theme-accent: #FF5722;
+$mdc-theme-background: #263238;
+
+@import '~normalize.css/normalize';
+
+@import '~@material/theme/mdc-theme';
+@import '~@material/typography/mdc-typography';
+@import '~@material/toolbar/mdc-toolbar';
+@import '~@material/layout-grid/mdc-layout-grid';
+@import '~@material/tabs/mdc-tabs';
+@import '~@material/button/mdc-button';
+@import "~@material/card/mdc-card";
+@import "~@material/list/mdc-list";
+@import "~@material/elevation/mdc-elevation";
+@import "~@material/ripple/mdc-ripple";
+
+@import '~roboto-fontface/css/roboto/roboto-fontface';
+@import '~material-design-icons/iconfont/material-icons';
+
+@import 'icon-sizes';
+@import 'belts';
+@import 'toolbar';
+@import 'card-grid';
+@import 'leaderboard';
+@import 'skills';
+
+$text-color: #FAFAFA;
+
+body,
+a {
+  color: $text-color;
+}
+
+// Helper
+.center {
+  justify-content: center;
+  text-align: center;
+}
+
+// Layout
+.mdc-toolbar__row, .page__content {
+  max-width: 1312px;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+.page__content {
+  margin-top: 75px;
+}
+
+.logo {
+  vertical-align: top;
+  height: 3.5rem;
+  margin-right: 10px;
+}

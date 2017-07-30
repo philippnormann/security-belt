@@ -1,0 +1,4 @@
+title: SSL everywhere
+why: Don't send data: over unencrypted channels
+how: Use SSL for all services you offer and validate SSL certificates for all services you consume
+validation: Use nmap to ensure only port 443 is open

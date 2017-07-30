@@ -1,0 +1,18 @@
+$belt-colors: (
+    white-belt: #FAFAFA,
+    yellow-belt: #F9A825,
+    orange-belt: #EF6C00,
+    green-belt: #2E7D32,
+    blue-belt: #1565C0,
+    brown-belt: #4E342E,
+    black-belt: #212121
+);
+
+@each $belt, $color in $belt-colors {
+    .#{$belt} {
+        background: $color !important;
+    }
+    .#{$belt}-text {
+        color: $color !important;
+    }
+}

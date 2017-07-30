@@ -1,0 +1,53 @@
+extends layout
+
+block content
+
+  - beltKeys = Object.keys(skills)
+  - beltNames = {white: 'White', yellow: 'Yellow', orange: 'Orange', green: 'Green', blue: 'Blue', brown: 'Brown', black:'Black'}
+  - nextBelt = beltKeys[beltKeys.indexOf(team.belt)+1];
+
+  div(class='mdc-layout-grid')
+    div(class='mdc-layout-grid__inner')
+      
+      section(class='center mdc-layout-grid__cell--span-12 team-info')
+        h1(class='mdc-typography--display2')= 'Team ' + team.name
+        h2(class='mdc-typography--display1') Belt: 
+          strong(id='belt-color' class=`${team.belt}-belt-text`)= beltNames[team.belt]
+        h3(class='mdc-typography--headline')= 'Security Champion: ' 
+          a(href='mailto:' + team.champion.email)
+            strong= team.champion.name
+            
+      div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar')
+        div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back')
+          a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll back button') navigate_before
+        div(class='mdc-tab-bar-scroller__scroll-frame')
+          nav(class='mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs')
+            each beltColor in beltKeys
+              a(class=`${beltColor}-belt mdc-tab ${nextBelt == beltColor ? 'mdc-tab--active' : ''}` href=`#${beltColor}`)= beltNames[beltColor]   
+            span(class='mdc-tab-bar__indicator')
+        div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward')
+          a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll forward button') navigate_next
+
+  each beltColor in beltKeys
+    section(class='card-grid' id=`${beltColor}-section` style='display:none;')
+      each skill in skills[beltColor]
+        if (team.skills.find((teamSkill) => teamSkill.name == skill.fileName))
+          - status = 'done'
+        else
+          - status = 'todo'
+        div(class=`mdc-card skill-card ${status}` data-team=team.name data-skill=skill.fileName)
+          section(class='mdc-card__primary')
+            h1(class='mdc-card__title mdc-card__title--large')= skill.title
+          section(class='mdc-card__supporting-text')
+            span(class='skill-section') Why
+            p= skill.why
+            span(class='skill-section') How
+            p= skill.how
+            span(class='skill-section') Validation
+            p= skill.validation
+          if skill.links
+            section(class='mdc-card__actions')
+              each link in skill.links
+                each target, desc in link
+                  a(class='mdc-card__action'  href=`${target}`) 
+                    button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised mdc-button--primary')= desc

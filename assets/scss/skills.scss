@@ -1,0 +1,54 @@
+.team-info h1,
+.team-info h2,
+.team-info h3 {
+  margin: 10px;
+}
+
+.belt-toolbar {
+  background: initial;
+  z-index: 0; 
+}
+
+.belt-toolbar .mdc-tab {
+  color: hsla(0,0%,100%,.7);
+}
+
+.belt-toolbar .mdc-tab--active {
+  color: #fff;
+}
+
+.belt-toolbar .mdc-tab-bar__indicator {
+  background-color: #fff;
+}
+
+.belt-toolbar .mdc-tab.mdc-ripple-upgraded:before {
+  background-color: hsla(0, 0%, 100%, .16);;
+}
+
+.mdc-card {
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out;
+}
+
+.todo {
+  background: #E53935
+}
+.done {
+  background: #43A047;
+}
+
+.skill-section {
+  font-weight: 700;
+}
+
+.mdc-card__supporting-text p:last-child {
+  margin-bottom: 0;
+}
+
+.mdc-card__actions {
+  flex-wrap: wrap;
+}
+
+.mdc-card__actions .mdc-card__action {
+  margin-bottom: 8px;
+}

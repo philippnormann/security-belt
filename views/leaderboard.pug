@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div(class='mdc-layout-grid')
+    div(class='mdc-layout-grid__inner')
+      
+      ul(class='mdc-list mdc-list--avatar-list mdc-layout-grid__cell--span-12')
+        - rank = 1
+        - lastSkillCount = 0
+        each team in teams
+          if team.belt == 'white'
+            - rankTextColor = 'black'
+          else
+            - rankTextColor = 'white'
+          a(href=`/teams/${encodeURI(team.name)}` class='mdc-list-item' data-mdc-auto-init='MDCRipple')
+            span(class=`mdc-list-item__start-detail center ${team.belt}-belt ${rankTextColor}-belt-text`)= rank
+            = team.name
+            span(class='mdc-list-item__end-detail')= team.skillCount
+
+          if lastSkillCount != team.skillCount
+            - rank++
+          - lastSkillCount = team.skillCount
