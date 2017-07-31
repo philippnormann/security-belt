@@ -49,7 +49,7 @@
     "file-loader": "^0.11.2",
     "material-components-web": "^0.13.0",
     "material-design-icons": "^3.0.1",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.0",
     "node-sass": "^4.5.3",
     "normalize.css": "^7.0.0",
     "resolve-url-loader": "^2.1.0",
