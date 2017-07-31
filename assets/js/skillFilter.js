@@ -9,14 +9,6 @@ function filterSkills() {
   });
 }
 
-window.addEventListener('load', () => {
-  const activeBelt = document.querySelector('.belt-toolbar .mdc-tab--active');
-  if (activeBelt) {
-    window.location.hash = activeBelt.hash;
-    filterSkills();
-  }
-});
-
 window.addEventListener('hashchange', () => {
   filterSkills();
 });

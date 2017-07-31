@@ -29,7 +29,7 @@ block content
           a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll forward button') navigate_next
 
   each beltColor in beltKeys
-    section(class='card-grid' id=`${beltColor}-section` style='display:none;')
+    section(class='card-grid' id=`${beltColor}-section` style=`display: ${nextBelt == beltColor ? 'block' : 'none'}`)
       each skill in skills[beltColor]
         if (team.skills.find((teamSkill) => teamSkill.name == skill.fileName))
           - status = 'done'
