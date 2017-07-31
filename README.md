@@ -24,7 +24,7 @@ For changes to the clients `.js` and `.scss` files to take effect, the static as
 
 A watch target is included for this purpose:
 ```bash
-npm run build:watch
+npm run build:dev
 ```
 ### Prerequisites
 You will need a mongoDB for the teams. The database will be automatically seeded once the app is running.
