@@ -1,6 +1,8 @@
 # ![logo](https://rawgit.com/philippnormann/security-belt/master/public/logo.svg) Security Belt
 
 [![Build Status](https://travis-ci.org/philippnormann/security-belt.svg?branch=master)](https://travis-ci.org/philippnormann/security-belt)
+[![Dependencies Status](https://david-dm.org/philippnormann/security-belt/status.svg)](https://david-dm.org/philippnormann/security-belt)
+[![DevDependencies Status](https://david-dm.org/philippnormann/security-belt/dev-status.svg)](https://david-dm.org/philippnormann/security-belt?type=dev)
 [![Heroku](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://security-belt.herokuapp.com/)
 
 A framework for improving the IT-Security of your teams through gamification.
