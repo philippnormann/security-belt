@@ -27,8 +27,7 @@ $mdc-theme-background: #263238;
 
 $text-color: #FAFAFA;
 
-body,
-a {
+body, a, p, h1, h2, h3, h4, .mdc-card__title, .skill-section {
   color: $text-color;
 }
 
