@@ -1,0 +1,8 @@
+title: Input Validation
+why: Prevent malformed data from entering the system. This can also prevent XSS attacks
+how: Validate all the data that is entering your system syntactically and semantically
+validation: Automated tests
+links:
+  - Input Validation Cheat Sheet: https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet
+  - Testing for Input Validation: https://www.owasp.org/index.php/Testing_for_Input_Validation
+

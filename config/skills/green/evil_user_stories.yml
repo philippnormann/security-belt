@@ -1,0 +1,6 @@
+title: Evil user stories
+why: The earlier you find a security flaw, the cheaper it is to fix it. Security is built in, not added on
+how: Write evil user stories out of the perspective of a potential attacker and perform security-focused code reviews
+validation: Evil user stories are part of every sprint backlog
+links:
+  - Don't Forget EVIL User Stories: https://www.owasp.org/index.php/Agile_Software_Development:_Don%27t_Forget_EVIL_User_Stories

@@ -1,0 +1,6 @@
+title: Dependency checks
+why: Insecure libraries can affect the security of your application 
+how: Regulary check your used dependancies for known vulnerabilities
+validation: Automated dependency checks in your build pipeline 
+links:
+  - OWASP Dependency Check: https://www.owasp.org/index.php/OWASP_Dependency_Check
