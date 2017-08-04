@@ -34,7 +34,7 @@
     "js-yaml": "^3.9.1",
     "mongodb": "^2.2.30",
     "morgan": "^1.8.2",
-    "pug": "^2.0.0-rc.2",
+    "pug": "^2.0.0-rc.3",
     "request": "^2.81.0",
     "serve-favicon": "^2.4.3",
     "walk": "^2.3.9"
@@ -65,7 +65,7 @@
     "resolve-url-loader": "^2.1.0",
     "roboto-fontface": "^0.8.0",
     "sass-loader": "^6.0.6",
-    "sinon": "^2.4.1",
+    "sinon": "^3.0.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
     "yaml-lint": "0.0.4"
