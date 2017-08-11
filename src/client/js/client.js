@@ -1,7 +1,7 @@
 /* eslint-env browser */
 'use strict';
 
-import '../scss/style.scss';
+import '../styles/style.scss';
 
 import './skillFilter';
 import './skillToggle';

@@ -20,10 +20,10 @@ state.connectToDB().then(() =>
 ).catch((err) => console.error(err));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '..','client', 'views'));
 app.set('view engine', 'pug');
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', '..', 'public', 'favicon.ico')));
 app.use(logger('short', {
   skip: (req, res) => res['_headers']['cache-control']
 }));
@@ -40,7 +40,7 @@ app.use(function (req, res, next) {
   res.redirect('https://' + req.headers.host + req.url);
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 app.use('/', index.router);
 app.use('/teams', teams.router);

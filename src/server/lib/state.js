@@ -1,7 +1,7 @@
 'use strict';
 
 const skills = require('./skills');
-const teams = require('../config/teams.json').teams;
+const teams = require('../../../config/teams.json').teams;
 const MongoClient = require('mongodb').MongoClient;
 const dbUser = process.env['DB_USER'];
 const dbPassword = process.env['DB_PASS'];

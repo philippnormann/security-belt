@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 'use strict';
-const skills = require('../lib/skills');
+const skills = require('../src/server/lib/skills');
 const assert = require('assert');
 
 describe('Skills', () => {

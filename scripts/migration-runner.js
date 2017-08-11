@@ -27,12 +27,15 @@ function connectToDB() {
 
 function readMigrations() {
   return new Promise((resolve, reject) => {
-    const walker = walk.walk('./migrations');
+    const walker = walk.walk(__dirname + '/migrations');
     walker.on('file', (root, fileStats, next) => {
       if (fileStats.name.endsWith('.js'))
         migrationNames.push(fileStats.name);
       next();
     });
+    walker.on('errors', (root, nodeStatsArray, next) =>
+      next()
+    );
     walker.on('end', () => {
       migrationNames.sort();
       migrationNames.length > 0 ? resolve() : reject();
@@ -64,5 +67,6 @@ readMigrations()
   .then(() => db.close())
   .catch((err) => {
     console.error(err);
-    db.close();
+    if (db)
+      db.close();
   });

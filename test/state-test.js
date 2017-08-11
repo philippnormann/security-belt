@@ -3,7 +3,7 @@
 const sinon = require('sinon');
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-const state = require('../lib/state');
+const state = require('../src/server/lib/state');
 let collectionStub;
 
 before((done) => {
