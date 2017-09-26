@@ -9,7 +9,7 @@ block content
         div(class='card-grid')
 
           each badge in badges
-            div(class=`mdc-card skill-card` style='background-color:gray')
+            div(class=`mdc-card` style='background-color:gray')
               section(class='mdc-card__primary')
                 h1(class='mdc-card__title mdc-card__title--large')= badge.title
               section(class='mdc-card__supporting-text')
@@ -17,4 +17,4 @@ block content
                 p= badge.description
                 ul(class='mdc-list')
                   each skill in badge.requiredSkills
-                    li(class='mdc-list-item')= skill
+                    li(class='mdc-list-item')= skill.title

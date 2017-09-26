@@ -14,7 +14,7 @@ const dbURL = (dbUser && dbPassword) ?
 let db;
 let collection;
 
-function connectToDB() {
+function connectToDB(config) {
   return MongoClient.connect(dbURL).then((connection) => {
     db = connection;
     collection = db.collection('belt');

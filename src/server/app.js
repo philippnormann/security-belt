@@ -16,10 +16,6 @@ const state = require('./lib/state');
 
 const app = express();
 
-state.connectToDB().then(() =>
-  console.log('Connection to mongoDB successful!')
-).catch((err) => console.error(err));
-
 // view engine setup
 app.set('views', path.join(__dirname, '..','client', 'views'));
 app.set('view engine', 'pug');
@@ -68,4 +64,18 @@ app.use(function (err, req, res) {
   res.render('error');
 });
 
-module.exports = app;
+function startServer(config) {
+  app.set('port', config.server.httpPort || 3000);
+  app.listen(app.get('port'), async () => {
+    try {
+      await state.connectToDB(config.database);
+      console.info(`Connected to mongoDB`);
+    } catch(ex) {
+      console.info(`Failed to connect to mongoDB: `, ex);
+    }
+    console.info(`Server listening on http://localhost:${app.get('port')}`);
+  });
+}
+
+exports.startServer = startServer;
+exports.app = app;
