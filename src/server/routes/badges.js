@@ -9,7 +9,7 @@ Router.get('/', async (req, res) => {
   const allSkillsFlat = [];
   Object.keys(allSkillsByBelt).forEach((color) => {
     allSkillsFlat.push(...allSkillsByBelt[color]);
-  })
+  });
   const badgesWithSkillInfos = [];
   badges.forEach((badge) => {
     const requiredSkills = badge.requiredSkills.map((id) => {

@@ -21,14 +21,14 @@
       "unix"
     ],
     "quotes": [
-      "error",
+      "warn",
       "single"
     ],
     "semi": [
       "error",
       "always"
     ],
-    "no-console": ["error", {
+    "no-console": ["warn", {
       "allow": ["log","warn", "error"]
     }]
   }
