@@ -14,6 +14,10 @@
     "node": ">= 7.0.0"
   },
   "private": true,
+  "bin": {
+    "security-belt-server": "./bin/security-belt-server",
+    "security-belt-migrator": "./scripts/migration-runner.js"
+  },
   "scripts": {
     "build": "npm run build:production",
     "build:production": "NODE_ENV=production webpack --optimize-minimize --progress --colors",
@@ -25,7 +29,7 @@
     "test": "npm run lint && npm run test:nolint",
     "heroku-postbuild": "npm run build",
     "prestart": "./scripts/migration-runner.js",
-    "start": "./src/server/bin/www",
+    "start": "./bin/security-belt-server start",
     "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm"
   },
   "dependencies": {

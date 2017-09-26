@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const fs = require('fs');
+const yargs = require('yargs');
+const logger = console;
+const yaml = require('js-yaml');
+const securityBelt = require('../src/server/app');
+
+const defaultConfigLocation = path.resolve(__dirname, '../config/security-belt.yaml');
+
+yargs.option('cfg', {
+  describe: 'Config file',
+  default: defaultConfigLocation
+});
+
+yargs.option('port', {
+  describe: 'HTTP port. Takes precedence before configuration',
+  default: 3000
+});
+
+function startServer(argv) {
+  const { verbose, port, cfg } = argv;
+  const defaultConfig = yaml.safeLoad(fs.readFileSync(defaultConfigLocation, 'utf-8'));
+  let userConfig = {};
+  if(cfg !== defaultConfigLocation) {
+    logger.info(`Using custom configuration ${cfg}`);
+    userConfig = yaml.safeLoad(fs.readFileSync(cfg, 'utf-8'));
+  }
+  const config = Object.assign({}, defaultConfig, userConfig);
+  // Overwrite config from command line args
+  config.server.port = port;
+
+  // TODO(tk): Remove this workaround in future versions
+  process.env.DB_HOST = config.database.host;
+  process.env.DB_USER = config.database.user;
+  process.env.DB_PASS = config.database.password;
+  process.env.DB_NAME = config.database.collection;
+
+  // Start up the server
+  securityBelt.startServer(config);
+}
+
+const argv = yargs.usage('$0 command')
+  .command('start', 'Start security belt server', () => {}, startServer)
+  .demand(1, 'must provide a valid command')
+  .help('help')
+  .argv;
