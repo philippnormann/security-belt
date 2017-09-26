@@ -10,6 +10,7 @@ const teams = require('./routes/teams');
 const leaderboard = require('./routes/leaderboard');
 const skill = require('./routes/skill');
 const api = require('./routes/api');
+const badges = require('./routes/badges');
 
 const state = require('./lib/state');
 
@@ -47,6 +48,7 @@ app.use('/teams', teams.router);
 app.use('/skill', skill.router);
 app.use('/leaderboard', leaderboard.router);
 app.use('/api', api.router);
+app.use('/badges', badges.router);
 
 // catch 404
 app.use(function (req, res) {

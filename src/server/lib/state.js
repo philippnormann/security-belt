@@ -33,12 +33,12 @@ async function getTeamGraph(teamName, days) {
           _id: teamName
         }
       },
-      { 
-        $project: { 
-          skills: { 
-            $filter: { 
-              input: '$skills', 
-              as: 'skill', 
+      {
+        $project: {
+          skills: {
+            $filter: {
+              input: '$skills',
+              as: 'skill',
               cond: { $lte: ['$$skill.since', d]}
             }
           }
@@ -97,7 +97,7 @@ async function getTeam(teamName) {
     belt: belt(currentSkills, fileNames),
     skills: currentSkills,
     skillCount: currentSkills.length
-  }; 
+  };
   return team;
 }
 
@@ -109,7 +109,7 @@ async function createTeam(teamName) {
   if (getTeamNames().includes(teamName)) {
     const team = {_id: teamName, skills: []};
     return collection.insertOne(team);
-  } else { 
+  } else {
     return Promise.reject(Error('Team not found!'));
   }
 }
@@ -166,6 +166,23 @@ function belt(teamSkills, fileNames) {
   return currBelt;
 }
 
+function getBadges() {
+  const fs = require('fs');
+  const yaml = require('js-yaml');
+  const glob = require('glob');
+  const badgePath = `${__dirname}/../../../config/badges`;
+  return new Promise((resolve, reject) => {
+    glob(`${badgePath}/**/*.yaml`, (err, files) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(files.map(f => {
+        return yaml.safeLoad(fs.readFileSync(f, 'utf-8'));
+      }));
+    });
+  });
+}
+
 exports.connectToDB = connectToDB;
 exports.getTeamGraph = getTeamGraph;
 exports.getGraph = getGraph;
@@ -177,3 +194,4 @@ exports.addToSkillSet = addToSkillSet;
 exports.removeFromSkillSet = removeFromSkillSet;
 exports.toggleSkill = toggleSkill;
 exports.belt = belt;
+exports.getBadges = getBadges;

@@ -15,7 +15,7 @@ html(class='mdc-typography')
             h1(class='mdc-toolbar__title') Security Belt
         section(class='mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-end')
           nav(class='mdc-tab-bar' data-mdc-auto-init='MDCTabBar')
-            - var items = { teams : 'Teams', leaderboard: 'Leaderboard'}
+            - var items = { teams : 'Teams', leaderboard: 'Leaderboard', badges: 'Badges'}
             for item, path in items
               if (item == title)
                 a(class='mdc-tab mdc-tab--active' href='/' + path)= item
