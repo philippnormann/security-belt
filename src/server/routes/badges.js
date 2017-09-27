@@ -1,7 +1,7 @@
 const express = require('express');
 const Router = express.Router();
-const state = require('../lib/state');
-const skills = require('../lib/skills');
+const state = require('../state');
+const skills = require('../skills');
 
 Router.get('/', async (req, res) => {
   const badges = await state.getBadges();
@@ -18,6 +18,7 @@ Router.get('/', async (req, res) => {
     const badgeWithInfos = Object.assign({}, badge, { requiredSkills: requiredSkills });
     badgesWithSkillInfos.push(badgeWithInfos);
   });
+  console.info(badgesWithSkillInfos);
   res.render('badges', {
     title: 'Badges',
     badges: badgesWithSkillInfos

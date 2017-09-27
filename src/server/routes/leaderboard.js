@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const state = require('../lib/state');
+const state = require('../state');
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
     teams.sort((a, b) => {
       return b.skillCount - a.skillCount;
     });
-    res.render('leaderboard', 
+    res.render('leaderboard',
       {'title': 'Leaderboard',
         'teams': teams});
   }).catch((err) => {

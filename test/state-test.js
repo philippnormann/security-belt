@@ -3,7 +3,7 @@
 const sinon = require('sinon');
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-const state = require('../src/server/lib/state');
+const state = require('../src/server/state');
 let collectionStub;
 
 before((done) => {
@@ -20,7 +20,7 @@ before((done) => {
 });
 
 describe('State', () => {
-  
+
   describe('teamSkills()', () => {
 
     it('should return an empty array if team has no skills', () => {
@@ -30,7 +30,7 @@ describe('State', () => {
       return state.teamSkills('Team Awesome').then((skills) => {
         if (skills.length == 0)
           return Promise.resolve();
-        else 
+        else
           return Promise.reject();
       });
     });
@@ -51,7 +51,7 @@ describe('addToSkillSet()', () => {
 
   it('should add skill with a current timestamp', () => {
     const clock = sinon.useFakeTimers();
-    const expectedArgs = [{_id : 'Team Awesome'}, 
+    const expectedArgs = [{_id : 'Team Awesome'},
       {$push : {skills: {name: 'secure_sauce', since: new Date()}}}];
     collectionStub.findOne.resolves(undefined);
     return state.addToSkillSet('Team Awesome', 'secure_sauce').then(() => {
@@ -70,7 +70,7 @@ describe('addToSkillSet()', () => {
   it('should reject if skill already added', () => {
     return new Promise((resolve,reject) => {
       collectionStub.findOne.resolves({skills: [{name: 'secure_sauce', since: new Date()}]});
-      state.addToSkillSet('Team Awesome', 'secure_sauce').then(() => {          
+      state.addToSkillSet('Team Awesome', 'secure_sauce').then(() => {
         reject(Error('expected reject but was resolved'));
       }).catch(() => {
         resolve();
@@ -83,7 +83,7 @@ describe('addToSkillSet()', () => {
 describe('removeFromSkillSet()', () => {
 
   it('should remove skill from set', () => {
-    const expectedArgs = [{_id: 'Team Awesome'}, 
+    const expectedArgs = [{_id: 'Team Awesome'},
       {$pull: {skills: {name: 'secure_sauce'}}}];
     return state.removeFromSkillSet('Team Awesome', 'secure_sauce').then(() => {
       if (collectionStub.updateOne.withArgs(expectedArgs[0],expectedArgs[1]).calledOnce)
@@ -95,7 +95,7 @@ describe('removeFromSkillSet()', () => {
         return Promise.reject(err);
       }
     });
-  });   
+  });
 
 });
 

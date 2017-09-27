@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
-const skills = require('../lib/skills');
-const state = require('../lib/state');
+const skills = require('../skills');
+const state = require('../state');
 
 const router = express.Router();
 

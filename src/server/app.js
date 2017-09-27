@@ -12,7 +12,7 @@ const skill = require('./routes/skill');
 const api = require('./routes/api');
 const badges = require('./routes/badges');
 
-const state = require('./lib/state');
+const state = require('./state');
 
 const app = express();
 

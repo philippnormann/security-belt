@@ -1,8 +1,8 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const state = require('../lib/state');
-const skills = require('../lib/skills');
+const state = require('../state');
+const skills = require('../skills');
 
 skills.getFileNames().then((fileNames) => {
   router.post('/toggle', function (req, res) {

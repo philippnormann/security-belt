@@ -45,7 +45,7 @@ function read(skillsFolder) {
 function get() {
   return new Promise((resolve, reject) => {
     if (skills === undefined)
-      read(__dirname + '/../../../config/skills').then((res) =>
+      read(path.resolve(__dirname, '../../config/skills')).then((res) =>
         resolve(res)
       ).catch((err) =>
         reject(err)

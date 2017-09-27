@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const state = require('../lib/state');
+const state = require('../state');
 const router = express.Router();
 
 router.get('/stats', async (req, res) => {
@@ -15,7 +15,7 @@ router.get('/stats/:teamName', async (req, res) => {
   if (state.getTeamNames().includes(teamName)) {
     const days = req.query.days || 14;
     const progress = await state.getTeamGraph(teamName, days);
-    res.json({progress}); 
+    res.json({progress});
   } else {
     res.status(404).json({error: `Team ${teamName} not found!`});
   }

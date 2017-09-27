@@ -1,21 +1,20 @@
-'use strict';
-
-const skills = require('./skills');
-const teams = require('../../../config/teams.json').teams;
 const MongoClient = require('mongodb').MongoClient;
-const dbUser = process.env['DB_USER'];
-const dbPassword = process.env['DB_PASS'];
-const dbName = process.env['DB_NAME'];
-const dbHost = process.env['DB_HOST'] || 'localhost';
-const dbURL = (dbUser && dbPassword) ?
-  `mongodb://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}/${dbName}?authMechanism=DEFAULT` :
-  (dbName) ? `mongodb://${dbHost}/${dbName}` : `mongodb://${dbHost}`;
+const skills = require('./skills');
+const config = require('./config');
+const teams = require('../../config/teams.json').teams;
 
 let db;
 let collection;
 
+function getMongoUri({ host, collection, user, password }) {
+  if(user && password) {
+    return `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}/${collection}?authMechanism=DEFAULT`;
+  }
+  return `mongodb://${host}/${collection}`;
+}
+
 function connectToDB() {
-  return MongoClient.connect(dbURL).then((connection) => {
+  return MongoClient.connect(getMongoUri(config.database)).then((connection) => {
     db = connection;
     collection = db.collection('belt');
     return Promise.resolve();
@@ -170,7 +169,7 @@ function getBadges() {
   const fs = require('fs');
   const yaml = require('js-yaml');
   const glob = require('glob');
-  const badgePath = `${__dirname}/../../../config/badges`;
+  const badgePath = `${__dirname}/../../config/badges`;
   return new Promise((resolve, reject) => {
     glob(`${badgePath}/**/*.yaml`, (err, files) => {
       if(err) {
