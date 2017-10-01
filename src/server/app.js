@@ -65,7 +65,7 @@ app.use(function (err, req, res) {
 });
 
 function startServer(config) {
-  app.set('port', config.server.port);
+  app.set('port', config.server.httpPort);
   app.listen(app.get('port'), async () => {
     try {
       await state.connectToDB(config.database);

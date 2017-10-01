@@ -28,13 +28,7 @@ function startServer(yargs) {
   }
   const config = Object.assign({}, defaultConfig, userConfig);
   // Overwrite config from command line args
-  config.server.port = port;
-
-  // TODO(tk): Remove this workaround in future versions
-  process.env.DB_HOST = config.database.host;
-  process.env.DB_USER = config.database.user;
-  process.env.DB_PASS = config.database.password;
-  process.env.DB_NAME = config.database.collection;
+  config.server.httpPort = port;
 
   // Start up the server
   securityBelt.startServer(config);
