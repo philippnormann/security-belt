@@ -5,11 +5,11 @@ const MongoClient = require('mongodb').MongoClient;
 const walk = require('walk');
 const dbUser = process.env['DB_USER'];
 const dbPassword = process.env['DB_PASS'];
-const dbName = process.env['DB_NAME'];
+const dbCollection = process.env['DB_COLLECTION'];
 const dbHost = process.env['DB_HOST'] || 'localhost';
 const dbURL = (dbUser && dbPassword) ?
-  `mongodb://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}/${dbName}?authMechanism=DEFAULT` :
-  (dbName) ? `mongodb://${dbHost}/${dbName}` : `mongodb://${dbHost}`;
+  `mongodb://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}/${dbCollection}?authMechanism=DEFAULT` :
+  (dbCollection) ? `mongodb://${dbHost}/${dbCollection}` : `mongodb://${dbHost}`;
 
 let db;
 let collection;
