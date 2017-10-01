@@ -9,18 +9,18 @@ const securityBelt = require('../src/server/app');
 
 const defaultConfigLocation = path.resolve(__dirname, '../config/security-belt.yaml');
 
-yargs.option('cfg', {
-  describe: 'Config file',
-  default: defaultConfigLocation
-});
+function startServer(yargs) {
+  const { port, cfg } = yargs
+    .option('cfg', {
+      describe: 'Config file',
+      default: defaultConfigLocation
+    })
+    .option('port', {
+      describe: 'HTTP port. Takes precedence before configuration',
+      default: 3000
+    })
+    .argv;
 
-yargs.option('port', {
-  describe: 'HTTP port. Takes precedence before configuration',
-  default: 3000
-});
-
-function startServer(argv) {
-  const { verbose, port, cfg } = argv;
   const defaultConfig = yaml.safeLoad(fs.readFileSync(defaultConfigLocation, 'utf-8'));
   let userConfig = {};
   if(cfg !== defaultConfigLocation) {
@@ -41,8 +41,8 @@ function startServer(argv) {
   securityBelt.startServer(config);
 }
 
-const argv = yargs.usage('$0 command')
-  .command('start', 'Start security belt server', () => {}, startServer)
+yargs.usage('$0 command')
+  .command('start', 'Start security belt server', startServer)
   .demand(1, 'must provide a valid command')
   .help('help')
   .argv;
