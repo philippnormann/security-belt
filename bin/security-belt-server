@@ -17,10 +17,9 @@ function startServer(yargs) {
     })
     .option('port', {
       describe: 'HTTP port. Takes precedence before configuration',
-      default: 3000
+      default: (process.env.PORT || 3000)
     })
     .argv;
-
   const defaultConfig = yaml.safeLoad(fs.readFileSync(defaultConfigLocation, 'utf-8'));
   let userConfig = {};
   if(cfg !== defaultConfigLocation) {
