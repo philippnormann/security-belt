@@ -1,28 +1,3 @@
-.mdc-tab-bar-scroller__indicator {
-  color: rgba(254,254,254,0.75);
-}
-
-.mdc-tab-bar-scroller__indicator:hover {
-  color: rgba(254,254,254,1);
-}
-
 .mdc-toolbar__section a {
   text-decoration: none;
 }
-
-.mdc-toolbar__row {
-  min-height: initial;
-  .mdc-tab-bar {
-    height: 72px;
-  }
-}
-
-.mdc-tab-bar:not(.mdc-tab-bar-upgraded) .mdc-tab:after{
-  top: initial;
-  bottom: 0;
-}
-
-.mdc-toolbar__title {
-  padding: 24px 0;
-}
-
