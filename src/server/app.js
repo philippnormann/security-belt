@@ -69,11 +69,11 @@ function startServer(config) {
   app.listen(app.get('port'), async () => {
     try {
       await state.connectToDB(config.database);
-      console.info(`Connected to mongoDB`);
+      console.log('Connected to mongoDB');
     } catch(ex) {
-      console.info(`Failed to connect to mongoDB: `, ex);
+      console.log('Failed to connect to mongoDB: ', ex);
     }
-    console.info(`Server listening on http://localhost:${app.get('port')}`);
+    console.log(`Server listening on http://localhost:${app.get('port')}`);
   });
 }
 

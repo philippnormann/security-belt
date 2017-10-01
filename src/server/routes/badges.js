@@ -18,7 +18,6 @@ Router.get('/', async (req, res) => {
     const badgeWithInfos = Object.assign({}, badge, { requiredSkills: requiredSkills });
     badgesWithSkillInfos.push(badgeWithInfos);
   });
-  console.info(badgesWithSkillInfos);
   res.render('badges', {
     title: 'Badges',
     badges: badgesWithSkillInfos
