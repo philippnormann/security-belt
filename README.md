@@ -54,7 +54,7 @@ This is better suited for development since you don't have to rebuild the app co
 ### Databse connection:
 - `DB_USER`
 - `DB_PASS`
-- `DB_NAME`
+- `DB_COLLECTION`
 - `DB_HOST`
 
 ### HTTPS redirect:
