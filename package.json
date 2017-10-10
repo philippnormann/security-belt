@@ -33,17 +33,6 @@
     "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.1",
-    "js-yaml": "^3.10.0",
-    "mongodb": "^2.2.31",
-    "morgan": "^1.9.0",
-    "pug": "^2.0.0-rc.4",
-    "request": "^2.83.0",
-    "serve-favicon": "^2.4.5",
-    "normalize.css": "^7.0.0",
-    "roboto-fontface": "^0.8.0",
-    "walk": "^2.3.9",
     "@material/auto-init": "0.2.0",
     "@material/button": "0.7.0",
     "@material/card": "0.2.9",
@@ -54,7 +43,18 @@
     "@material/tabs": "0.3.0",
     "@material/theme": "0.3.1",
     "@material/toolbar": "0.4.10",
-    "@material/typography": "0.3.0"
+    "@material/typography": "0.3.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "js-yaml": "^3.10.0",
+    "mongodb": "^2.2.31",
+    "morgan": "^1.9.0",
+    "normalize.css": "^7.0.0",
+    "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0",
+    "roboto-fontface": "^0.8.0",
+    "serve-favicon": "^2.4.5",
+    "walk": "^2.3.9"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
