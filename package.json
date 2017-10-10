@@ -30,7 +30,9 @@
     "heroku-postbuild": "npm run build",
     "prestart": "./scripts/migration-runner.js",
     "start": "./bin/security-belt-server start",
-    "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm"
+    "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm",
+    "prepush": "npm run test",
+    "precommit": "npm run lint"
   },
   "dependencies": {
     "@material/auto-init": "0.2.0",
@@ -64,6 +66,7 @@
     "eslint": "^4.8.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
+    "husky": "^0.14.3",
     "mocha": "^3.5.3",
     "node-sass": "^4.5.3",
     "resolve-url-loader": "^2.1.0",
