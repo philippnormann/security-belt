@@ -1,7 +1,16 @@
 .mdc-card.badge {
-  background: $mdc-theme-primary
+  background: $mdc-theme-primary;
 }
 
 .mdc-card.badge .mdc-list {
-  background: $mdc-theme-secondary
+  background-color: $mdc-theme-primary;
+}
+
+.badge--achieved {
+  color: #2E7D32;
+}
+
+.badge--unachieved {
+  color: #d50000;
+
 }

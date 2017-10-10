@@ -2,6 +2,7 @@
 const express = require('express');
 const skills = require('../skills');
 const state = require('../state');
+const badge = require('../badge');
 
 const router = express.Router();
 
@@ -11,10 +12,19 @@ skills.get().then((result) => {
     if (state.getTeamNames().includes(teamName)) {
       try {
         const team = await state.getTeam(teamName);
+        const allBadges = await state.getBadges();
+        const teamBadges = allBadges.map(b => {
+          const hasBadge = badge.teamHasBadge(team, b);
+          return {
+            badge: b,
+            hasBadge: hasBadge
+          };
+        });
         res.render('team', {
-          'title': team.name,
-          'team': team,
-          'skills': result,
+          title: team.name,
+          team: team,
+          skills: result,
+          badges: teamBadges
         });
       } catch(err) {
         console.error(err);

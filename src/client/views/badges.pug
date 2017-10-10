@@ -4,10 +4,8 @@ block content
 
   div(class='mdc-layout-grid')
     div(class='mdc-layout-grid__inner')
-
       div(class='center mdc-layout-grid__cell--span-12')
-        div(class='card-grid')
-
+        div
           each badge in badges
             div(class='mdc-card badge')
               section(class='mdc-card__primary')
@@ -18,3 +16,14 @@ block content
                 ul(class='mdc-list')
                   each skill in badge.requiredSkills
                     li(class='mdc-list-item')= skill.title
+              section(class='mdc-card__supporting-text')
+                span(class='skill-section') Team List
+                ul(class='mdc-list')
+                  each team in badge.teams
+                      li(class=`mdc-list-item`)
+                        a(href=`/teams/${team.teamName}`)
+                          if team.hasBadge
+                            i(class='mdc-list-item__start-detail material-icons') done
+                          else
+                            i(class='mdc-list-item__start-detail material-icons') error
+                          span= team.teamName

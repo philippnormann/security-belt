@@ -8,22 +8,38 @@ block content
 
   div(class='mdc-layout-grid')
     div(class='mdc-layout-grid__inner')
-      
+
       section(class='center mdc-layout-grid__cell--span-12 team-info')
         h1(class='mdc-typography--display2')= 'Team ' + team.name
-        h2(class='mdc-typography--display1') Belt: 
+        h2(class='mdc-typography--display1') Belt:
           strong(id='belt-color' class=`${team.belt}-belt-text`)= beltNames[team.belt]
-        h3(class='mdc-typography--headline')= 'Security Champion: ' 
+        h3(class='mdc-typography--headline')= 'Security Champion: '
           a(href='mailto:' + team.champion.email)
             strong= team.champion.name
-            
+
+      section(class='center mdc-layout-grid__cell--span-12')
+        h1(class='mdc-typography--title') Badges
+        div(class='mdc-layout-grid')
+          div(class='mdc-layout-grid__inner')
+            each badge in badges
+              div(class='mdc-layout-grid__cell')
+                a(href="/badges")
+                  div(class='mdc-grid-tile__primary')
+                    div(class='mdc-grid-tile__primary-content')
+                      if badge.hasBadge
+                        i(class='mdc-list-item__start-detail material-icons badge--achieved') done
+                      else
+                        i(class='mdc-list-item__start-detail material-icons badge--unachieved') error
+                  div(class='mdc-grid-tile__secondary')
+                    span(class='mdc-grid-tile__title')= badge.badge.title
+
       div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar')
         div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back')
           a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll back button') navigate_before
         div(class='mdc-tab-bar-scroller__scroll-frame')
           nav(class='mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs')
             each beltColor in beltKeys
-              a(class=`${beltColor}-belt mdc-tab ${nextBelt == beltColor ? 'mdc-tab--active' : ''}` href=`#${beltColor}`)= beltNames[beltColor]   
+              a(class=`${beltColor}-belt mdc-tab ${nextBelt == beltColor ? 'mdc-tab--active' : ''}` href=`#${beltColor}`)= beltNames[beltColor]
             span(class='mdc-tab-bar__indicator')
         div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward')
           a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll forward button') navigate_next
@@ -49,5 +65,5 @@ block content
             section(class='mdc-card__actions')
               each link in skill.links
                 each target, desc in link
-                  a(class='mdc-card__action'  href=`${target}`) 
+                  a(class='mdc-card__action'  href=`${target}`)
                     button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-filled-button')= desc

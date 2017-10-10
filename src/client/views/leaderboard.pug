@@ -3,7 +3,7 @@ extends layout
 block content
   div(class='mdc-layout-grid')
     div(class='mdc-layout-grid__inner')
-      
+
       ul(class='mdc-list mdc-list--avatar-list mdc-layout-grid__cell--span-12')
         - rank = 1
         - lastSkillCount = 0
@@ -15,7 +15,10 @@ block content
           a(href=`/teams/${encodeURI(team.name)}` class='mdc-list-item' data-mdc-auto-init='MDCRipple')
             span(class=`mdc-list-item__start-detail center ${team.belt}-belt ${rankTextColor}-belt-text`)= rank
             = team.name
-            span(class='mdc-list-item__end-detail')= team.skillCount
+            div(class='mdc-list-item__end-detail')
+              span= `${team.badges.completed} / ${team.badges.total} Badges`
+              span(class='divider__vertical')
+              span= team.skillCount
 
           if lastSkillCount != team.skillCount
             - rank++

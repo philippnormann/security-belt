@@ -161,9 +161,13 @@ function getBadges() {
       if(err) {
         return reject(err);
       }
-      return resolve(files.map(f => {
-        return yaml.safeLoad(fs.readFileSync(f, 'utf-8'));
-      }));
+      const badges = files.map(f => {
+        const b = yaml.safeLoad(fs.readFileSync(f, 'utf-8'));
+        b.id = b.title.toLowerCase().replace(/\s+/, '-');
+        return b;
+      });
+
+      return resolve(badges);
     });
   });
 }
