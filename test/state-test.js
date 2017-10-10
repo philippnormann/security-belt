@@ -4,9 +4,10 @@ const sinon = require('sinon');
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const state = require('../src/server/state');
+const db = require('../src/server/db');
 let collectionStub;
 
-before((done) => {
+before(async () => {
   collectionStub = {
     findOne: sinon.stub().resolves({skills: []}),
     updateOne: sinon.stub().resolves(),
@@ -16,7 +17,7 @@ before((done) => {
     collection: sinon.stub().returns(collectionStub)
   };
   sinon.stub(MongoClient, 'connect').resolves(dbStub);
-  state.connectToDB().then(done);
+  await db.getConnection();
 });
 
 describe('State', () => {

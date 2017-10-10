@@ -12,8 +12,6 @@ const skill = require('./routes/skill');
 const api = require('./routes/api');
 const badges = require('./routes/badges');
 
-const state = require('./state');
-
 const app = express();
 
 // view engine setup
@@ -64,9 +62,9 @@ app.use(function (err, req, res) {
 
 function startServer(config) {
   app.set('port', config.server.httpPort);
+
   app.listen(app.get('port'), async () => {
     try {
-      await state.connectToDB(config.database);
       console.log('Connected to mongoDB');
     } catch(ex) {
       console.log('Failed to connect to mongoDB: ', ex);

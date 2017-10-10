@@ -1,27 +1,9 @@
-const MongoClient = require('mongodb').MongoClient;
 const skills = require('./skills');
-const config = require('./config');
 const teams = require('../../config/teams.json').teams;
-
-let db;
-let collection;
-
-function getMongoUri({ host, collection, user, password }) {
-  if(user && password) {
-    return `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}/${collection}?authMechanism=DEFAULT`;
-  }
-  return `mongodb://${host}/${collection}`;
-}
-
-function connectToDB() {
-  return MongoClient.connect(getMongoUri(config.database)).then((connection) => {
-    db = connection;
-    collection = db.collection('belt');
-    return Promise.resolve();
-  });
-}
+const Mongo = require('./db');
 
 async function getTeamGraph(teamName, days) {
+  const collection = await Mongo.getConnection();
   const res = [];
   for (let i = days-1; i >= 0; i--) {
     const d = new Date();
@@ -105,6 +87,7 @@ function getTeamNames() {
 }
 
 async function createTeam(teamName) {
+  const collection = await Mongo.getConnection();
   if (getTeamNames().includes(teamName)) {
     const team = {_id: teamName, skills: []};
     return collection.insertOne(team);
@@ -114,6 +97,7 @@ async function createTeam(teamName) {
 }
 
 async function teamSkills(teamName) {
+  const collection = await Mongo.getConnection();
   const doc = await collection.findOne({ _id: teamName });
   if (doc) {
     return Promise.resolve(doc.skills);
@@ -124,6 +108,7 @@ async function teamSkills(teamName) {
 }
 
 async function addToSkillSet(teamName, cardName) {
+  const collection = await Mongo.getConnection();
   const doc = await collection.findOne({_id: teamName, skills: {$elemMatch: {name: cardName}}});
   if (doc) {
     return Promise.reject(Error('skill is already enabled'));
@@ -132,6 +117,7 @@ async function addToSkillSet(teamName, cardName) {
 }
 
 async function removeFromSkillSet(teamName, cardName) {
+  const collection = await Mongo.getConnection();
   return collection.updateOne({_id: teamName}, {$pull: {skills: {name: cardName}}});
 }
 
@@ -182,7 +168,6 @@ function getBadges() {
   });
 }
 
-exports.connectToDB = connectToDB;
 exports.getTeamGraph = getTeamGraph;
 exports.getGraph = getGraph;
 exports.getTeams = getTeams;
