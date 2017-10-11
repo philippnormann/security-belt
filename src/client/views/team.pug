@@ -11,8 +11,9 @@ block content
 
       section(class='center mdc-layout-grid__cell--span-12 team-info')
         h1(class='mdc-typography--display2')= 'Team ' + team.name
-        h2(class='mdc-typography--display1') Belt:
-          strong(id='belt-color' class=`${team.belt}-belt-text`)= beltNames[team.belt]
+        h2(class='mdc-typography--display1')
+          strong Belt:
+          strong(class=`team-info__belt ${team.belt}-belt-text`)= beltNames[team.belt]
         h3(class='mdc-typography--headline')= 'Security Champion: '
           a(href='mailto:' + team.securityChampion.email)
             strong= team.securityChampion.name
@@ -50,4 +51,4 @@ block content
     div(class='mdc-layout-grid__inner skill-list')
     each skill in team.skills
       div(class='mdc-layout-grid__cell skill-list__item' data-skill-rank=skill.rank data-skill-id=skill.id)
-        pre= JSON.stringify(skill, null, 4)
+        include skill-item.pug

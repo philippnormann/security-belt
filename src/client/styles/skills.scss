@@ -25,13 +25,6 @@
   transition: background-color 300ms ease-in-out;
 }
 
-.todo {
-  background: #E53935
-}
-.done {
-  background: #43A047;
-}
-
 .skill-section {
   font-weight: 700;
 }
@@ -46,4 +39,17 @@
 
 .mdc-card__actions .mdc-card__action {
   margin-bottom: 8px;
+}
+
+.skill-item {
+  transition: background-color 300ms ease-in-out;
+  margin: 5px;
+
+  &__closed {
+    background-color: green;
+  }
+
+  &__open {
+    background-color: red;
+  }
 }

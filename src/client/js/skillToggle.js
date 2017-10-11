@@ -1,5 +1,14 @@
-/* eslint-env browser */
-'use strict';
+const selectors = {
+  skillItem: '.skill-item',
+  beltText: '.team-info__belt'
+};
+
+function capitalize(s){
+  return s.toLowerCase()
+    .replace( /\b./g, function(a){
+      return a.toUpperCase();
+    });
+};
 
 function toggleSkill(team, skill) {
   return fetch('/skill/toggle', {
@@ -12,33 +21,52 @@ function toggleSkill(team, skill) {
   });
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+function toggleSkillState(id) {
+  const skill = document.querySelector(`${selectors.skillItem}[data-skill-id="${id}"]`);
+  if(skill) {
+    if(skill.classList.contains('skill-item__open')) {
+      skill.classList.remove('skill-item__open');
+      skill.classList.add('skill-item__closed');
+    } else {
+      skill.classList.remove('skill-item__closed');
+      skill.classList.add('skill-item__open');
+    }
+  }
 }
 
-const allMdcActions = document.querySelectorAll('a.mdc-card__action');
+function initSkillActions() {
+  const skills = document.querySelectorAll(selectors.skillItem);
+  skills.forEach(function(skill) {
+    skill.addEventListener('click', function(e) {
+      const card = e.target.closest(selectors.skillItem);
+      const { skillId, teamName } = card.dataset;
+      const skillTitle = skillId;
 
-allMdcActions.forEach((MdcAction) => {
-  MdcAction.addEventListener('click', (event) => {
-    event.stopPropagation();
-  });
-});
+      toggleSkill(teamName, skillTitle)
+        .then(async function(res) {
+          const body = await res.json();
+          if(res.status === 404) {
+            return;
+          }
 
-const allSkillCards = document.querySelectorAll('div.skill-card');
+          const beltText = document.querySelector(selectors.beltText);
+          beltText.innerHTML = `${capitalize(body.belt)}`;
 
-allSkillCards.forEach((skillCard) => {
-  skillCard.addEventListener('click', (event) => {
-    const card = event.currentTarget;
-    const team = card.getAttribute('data-team');
-    const skill = card.getAttribute('data-skill');
-    toggleSkill(team, skill).then((response) => {
-      response.json().then((data) => {
-        const beltColor = document.querySelector('#belt-color');
-        beltColor.className = `${data.belt}-belt-text`;
-        beltColor.innerHTML = capitalizeFirstLetter(data.belt);
-      });
-      card.classList.toggle('todo');
-      card.classList.toggle('done');
+          const oldBeltColor = document.querySelector(selectors.beltText).className.split(' ')
+            .find(function(c) {
+              return /.*-belt-text/.test(c);
+            });
+          beltText.classList.remove(oldBeltColor);
+          beltText.classList.add(`${body.belt}-belt-text`);
+
+          card.dataset.skillState = card.dataset.skillState === 'open' ? 'closed' : 'open';
+          toggleSkillState(skillTitle);
+        })
+        .catch(function(err) {
+          console.error(`Failed to toggle skill ${skillTitle}:`, err);
+        });
     });
   });
-});
+}
+
+initSkillActions();

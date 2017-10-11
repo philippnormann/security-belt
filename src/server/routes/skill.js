@@ -5,12 +5,14 @@ const state = require('../state');
 const skills = require('../skills');
 
 skills.getFileNames().then((fileNames) => {
-  router.post('/toggle', function (req, res) {
+  router.post('/toggle', async function (req, res) {
     state.toggleSkill(req.body.team, req.body.skill).then(() => {
       return state.teamSkills(req.body.team);
     }).then((teamSkills) => {
+      const belt = state.belt(teamSkills, fileNames);
+      console.info(`New belt for ${req.body.team}: ${belt}`);
       res.status(200).send({
-        'belt': state.belt(teamSkills, fileNames)
+        belt: belt
       });
     }).catch((error) => {
       res.status(404).send({

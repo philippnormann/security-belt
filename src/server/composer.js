@@ -52,12 +52,28 @@ async function getTeamRepresentation(name) {
   const allSkillsWithState = flatSkills.map(skill => {
     const withState = Object.assign({}, skill);
     withState.id = slug(withState.fileName);
-    withState.state = teamInfo.skills.find(s => s.fileName === skill.fileName) ? 'complete' : 'open';
+    withState.state = teamInfo.skills.find(s => {
+      return s.name === skill.fileName
+    }) ? 'closed' : 'open';
+    let links = [];
+    if(withState.links) {
+      withState.links.forEach(kvPairs => {
+        const flattened = [];
+        Object.keys(kvPairs).forEach(k => {
+          flattened.push({
+            title: k,
+            url: kvPairs[k]
+          });
+        });
+        links = links.concat(flattened);
+      });
+    }
+    withState.links = links;
     delete withState['fileName'];
     return withState;
   });
 
-  return {
+  const composed = {
     id: slug(teamInfo.name),
     name: teamInfo.name,
     securityChampion: teamInfo.champion,
@@ -66,6 +82,7 @@ async function getTeamRepresentation(name) {
     skillCount: teamInfo.skillCount,
     badges: teamBadges
   };
+  return composed;
 }
 
 exports.getTeamRepresentation = getTeamRepresentation;
