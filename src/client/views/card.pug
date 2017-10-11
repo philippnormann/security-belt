@@ -1,0 +1,20 @@
+      if (skill.state === 'closed')
+        - status = 'done'
+      else
+        - status = 'todo'
+      div(class=`mdc-card skill-card ${status}` data-team=team.name data-skill=skill.id data-skill-rank=skill.rank data-skill-state=skill.state)
+        section(class='mdc-card__primary')
+          h1(class='mdc-card__title mdc-card__title--large')= skill.title
+        section(class='mdc-card__supporting-text')
+          span(class='skill-section') Why
+          p= skill.why
+          span(class='skill-section') How
+          p= skill.how
+          span(class='skill-section') Validation
+          p= skill.validation
+        if skill.links
+          section(class='mdc-card__actions')
+            each link in skill.links
+              each target, desc in link
+                a(class='mdc-card__action'  href=`${target}`)
+                  button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-filled-button')= desc
