@@ -1,11 +1,30 @@
 const state = require('./state');
 const badge = require('./badge');
+const skills = require('./skills');
 
 function slug(s) {
   let slg = s;
   slg = slg.toLowerCase();
   slg = slg.replace(/\s+/, '-');
   return slg;
+}
+
+/**
+ * Ungroup the legacy representation of skills. It looks like this:
+ * { yellow: [...skills], green: [...skills] }
+ * which is turned into this:
+ * [ { <old-data>, rank: yellow }, { <old-data>, rank: green} ]
+ * @param {*Object} skills The grouped skills object
+ */
+function ungroupSkills(skills) {
+  let ungrouped = [];
+  Object.keys(skills).forEach(color => {
+    const byColor = skills[color].map(s => {
+      return Object.assign({}, s, { rank: color });
+    });
+    ungrouped = ungrouped.concat(byColor);
+  });
+  return ungrouped;
 }
 
 /**
@@ -27,10 +46,15 @@ async function getTeamRepresentation(name) {
       })
     });
   });
-  const skillsWithId = teamInfo.skills.map(skill => {
-    const id = slug(skill.fileName);
-    delete skill['fileName'];
-    return Object.assign({}, skill, { id });
+
+  const allSkills = await skills.get();
+  const flatSkills = ungroupSkills(allSkills);
+  const allSkillsWithState = flatSkills.map(skill => {
+    const withState = Object.assign({}, skill);
+    withState.id = slug(withState.fileName);
+    withState.state = teamInfo.skills.find(s => s.fileName === skill.fileName) ? 'complete' : 'open';
+    delete withState['fileName'];
+    return withState;
   });
 
   return {
@@ -38,7 +62,7 @@ async function getTeamRepresentation(name) {
     name: teamInfo.name,
     securityChampion: teamInfo.champion,
     belt: teamInfo.belt,
-    skills: skillsWithId,
+    skills: allSkillsWithState,
     skillCount: teamInfo.skillCount,
     badges: teamBadges
   };

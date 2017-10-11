@@ -2,6 +2,7 @@ const sinon = require('sinon');
 const assert = require('assert');
 const composer = require('../src/server/composer');
 const state = require('../src/server/state');
+const skills = require('../src/server/skills');
 
 describe('Composer', () => {
   describe('getTeamRepresentation', () => {
@@ -11,6 +12,11 @@ describe('Composer', () => {
         belt: 'white',
         skillCount: 1,
         skills: [
+          { fileName: 'my-skill', title: 'My skill' }
+        ]
+      });
+      sinon.stub(skills, 'get').resolves({
+        yellow: [
           { fileName: 'my-skill', title: 'My skill' }
         ]
       });
@@ -24,7 +30,7 @@ describe('Composer', () => {
       assert.equal(result.belt, 'white');
       assert.equal(result.skillCount, 1);
       assert.deepEqual(result.skills, [
-        { title: 'My skill', id: 'my-skill' }
+        { title: 'My skill', id: 'my-skill', rank: 'yellow', state: 'complete' }
       ]);
       assert.deepEqual(result.badges, [
         {
