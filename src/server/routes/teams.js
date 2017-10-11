@@ -38,6 +38,7 @@ skills.get().then((result) => {
   console.error(err);
 });
 
+
 router.get('/', (req, res) => {
   state.getTeams().then((teams) => {
     res.render('teams', {

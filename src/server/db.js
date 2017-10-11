@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
 const config = require('./config');
 
-function getMongoUri({ host, collection, user, password }) {
+function getMongoUri({ host, database, collection, user, password }) {
   if(user && password) {
-    return `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}/${collection}?authMechanism=DEFAULT`;
+    return `mongodb://${encodeURIComponent(user)}:${encodeURIComponent(password)}@${host}/${database}?authMechanism=DEFAULT`;
   }
   return `mongodb://${host}/${collection}`;
 }
