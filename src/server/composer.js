@@ -53,7 +53,7 @@ async function getTeamRepresentation(name) {
     const withState = Object.assign({}, skill);
     withState.id = slug(withState.fileName);
     withState.state = teamInfo.skills.find(s => {
-      return s.name === skill.fileName
+      return s.name === skill.fileName;
     }) ? 'closed' : 'open';
     let links = [];
     if(withState.links) {

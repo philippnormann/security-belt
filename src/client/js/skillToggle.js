@@ -1,3 +1,4 @@
+/* eslint-env browser */
 const selectors = {
   skillItem: '.skill-item',
   beltText: '.team-info__belt'
@@ -8,7 +9,7 @@ function capitalize(s){
     .replace( /\b./g, function(a){
       return a.toUpperCase();
     });
-};
+}
 
 function toggleSkill(team, skill) {
   return fetch('/skill/toggle', {

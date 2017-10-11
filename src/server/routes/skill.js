@@ -10,7 +10,6 @@ skills.getFileNames().then((fileNames) => {
       return state.teamSkills(req.body.team);
     }).then((teamSkills) => {
       const belt = state.belt(teamSkills, fileNames);
-      console.info(`New belt for ${req.body.team}: ${belt}`);
       res.status(200).send({
         belt: belt
       });
