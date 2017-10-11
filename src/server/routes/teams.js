@@ -2,29 +2,20 @@
 const express = require('express');
 const skills = require('../skills');
 const state = require('../state');
-const badge = require('../badge');
+const composer = require('../composer');
 
 const router = express.Router();
 
-skills.get().then((result) => {
+/* eslint-disable no-unused-vars */
+skills.get().then((_) => {
   router.get('/:teamName', async (req, res) => {
     const teamName = decodeURI(req.params.teamName);
     if (state.getTeamNames().includes(teamName)) {
       try {
-        const team = await state.getTeam(teamName);
-        const allBadges = await state.getBadges();
-        const teamBadges = allBadges.map(b => {
-          const hasBadge = badge.teamHasBadge(team, b);
-          return {
-            badge: b,
-            hasBadge: hasBadge
-          };
-        });
+        const repr = await composer.getTeamRepresentation(teamName);
         res.render('team', {
-          title: team.name,
-          team: team,
-          skills: result,
-          badges: teamBadges
+          title: repr.name,
+          team: repr
         });
       } catch(err) {
         console.error(err);
