@@ -4,7 +4,7 @@ function teamHasBadge(team, badge) {
     if(hasBadge === false) {
       return;
     }
-    const skill = team.skills.find(s => s.name === rs);
+    const skill = team.skills.find(s => { return (s.id === rs) || (s.name === rs); });
     if(!skill) {
       hasBadge = false;
     }

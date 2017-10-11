@@ -12,16 +12,16 @@ describe('Composer', () => {
         belt: 'white',
         skillCount: 1,
         skills: [
-          { fileName: 'my-skill', title: 'My skill' }
+          { name: 'my-skill' }
         ]
       });
       sinon.stub(skills, 'get').resolves({
         yellow: [
-          { fileName: 'my-skill', title: 'My skill' }
+          { name: 'my-skill', fileName: 'my-skill', title: 'My skill' }
         ]
       });
       sinon.stub(state, 'getBadges').returns([
-        { title: 'My badge', requiredSkills: ['my-skill'] }
+        { id: 'my-badge', title: 'My badge', requiredSkills: ['my-skill'] }
       ]);
       const teamname = 'Team 1';
       const result = await composer.getTeamRepresentation(teamname);
@@ -30,12 +30,12 @@ describe('Composer', () => {
       assert.equal(result.belt, 'white');
       assert.equal(result.skillCount, 1);
       assert.deepEqual(result.skills, [
-        { title: 'My skill', id: 'my-skill', rank: 'yellow', state: 'complete' }
+        { title: 'My skill', id: 'my-skill', name: 'my-skill', rank: 'yellow', state: 'closed', links: [] }
       ]);
       assert.deepEqual(result.badges, [
         {
           id: 'my-badge',
-          isComplete: false,
+          isComplete: true,
           title: 'My badge',
           requiredSkills: [
             { id: 'my-skill' }

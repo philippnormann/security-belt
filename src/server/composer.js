@@ -49,11 +49,13 @@ async function getTeamRepresentation(name) {
 
   const allSkills = await skills.get();
   const flatSkills = ungroupSkills(allSkills);
+
   const allSkillsWithState = flatSkills.map(skill => {
     const withState = Object.assign({}, skill);
     withState.id = slug(withState.fileName);
     withState.state = teamInfo.skills.find(s => {
-      return s.name === skill.fileName;
+      const has = s.name === skill.fileName;
+      return has;
     }) ? 'closed' : 'open';
     let links = [];
     if(withState.links) {
