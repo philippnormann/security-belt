@@ -33,6 +33,14 @@ app.use(function (req, res, next) {
   res.redirect('https://' + req.headers.host + req.url);
 });
 
+//set cross origin header
+app.use('/api', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD');
+  next();
+});
+
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 app.use('/', index.router);
