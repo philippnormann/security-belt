@@ -42,6 +42,7 @@
     "@material/layout-grid": "0.4.4",
     "@material/list": "0.2.19",
     "@material/ripple": "0.8.7",
+    "@material/snackbar": "^0.4.1",
     "@material/tabs": "0.3.0",
     "@material/theme": "0.3.1",
     "@material/toolbar": "0.4.10",
