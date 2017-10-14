@@ -44,7 +44,6 @@ You can also start a mongoDB container without a volume like this:
 docker run -d --name belt-mongo -p 27017:27017 mongo
 npm install
 npm test
-npm run build
 npm start
 ```
 This is better suited for development since you don't have to rebuild the app container every time.
@@ -54,6 +53,7 @@ This is better suited for development since you don't have to rebuild the app co
 ### Databse connection:
 - `DB_USER`
 - `DB_PASS`
+- `DB_NAME`
 - `DB_COLLECTION`
 - `DB_HOST`
 
