@@ -1,37 +1,16 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const fs = require('fs');
 const yargs = require('yargs');
-const logger = console;
-const yaml = require('js-yaml');
 const securityBelt = require('../src/server/app');
 
-const defaultConfigLocation = path.resolve(__dirname, '../config/security-belt.yaml');
-
 function startServer(yargs) {
-  const { port, cfg } = yargs
-    .option('cfg', {
-      describe: 'Config file',
-      default: defaultConfigLocation
-    })
+  const { port } = yargs
     .option('port', {
       describe: 'HTTP port. Takes precedence before configuration',
       default: (process.env.PORT || 3000)
-    })
-    .argv;
-  const defaultConfig = yaml.safeLoad(fs.readFileSync(defaultConfigLocation, 'utf-8'));
-  let userConfig = {};
-  if(cfg !== defaultConfigLocation) {
-    logger.info(`Using custom configuration ${cfg}`);
-    userConfig = yaml.safeLoad(fs.readFileSync(cfg, 'utf-8'));
-  }
-  const config = Object.assign({}, defaultConfig, userConfig);
-  // Overwrite config from command line args
-  config.server.httpPort = port;
-
+    }).argv;
   // Start up the server
-  securityBelt.startServer(config);
+  securityBelt.startServer(port);
 }
 
 yargs.usage('$0 command')

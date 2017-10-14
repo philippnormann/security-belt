@@ -11,6 +11,7 @@ const leaderboard = require('./routes/leaderboard');
 const skill = require('./routes/skill');
 const api = require('./routes/api');
 const badges = require('./routes/badges');
+const Mongo = require('./db');
 
 const app = express();
 
@@ -68,16 +69,17 @@ app.use(function (err, req, res) {
   res.render('error');
 });
 
-function startServer(config) {
-  app.set('port', config.server.httpPort);
+function startServer(httpPort) {
+  app.set('port', httpPort);
 
   app.listen(app.get('port'), async () => {
     try {
+      await Mongo.getConnection();
       console.log('Connected to mongoDB');
     } catch(ex) {
       console.log('Failed to connect to mongoDB: ', ex);
     }
-    console.log(`Server listening on http://localhost:${app.get('port')}`);
+    console.log(`Server listening on http://localhost:${httpPort}`);
   });
 }
 
