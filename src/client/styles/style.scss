@@ -14,8 +14,6 @@ $mdc-theme-background: #263238;
 @import "~@material/list/mdc-list";
 @import "~@material/elevation/mdc-elevation";
 @import "~@material/ripple/mdc-ripple";
-@import "~@material/snackbar/mdc-snackbar";
-
 @import '~roboto-fontface/css/roboto/roboto-fontface';
 
 @import 'icon-sizes';
@@ -66,7 +64,7 @@ a, u {
   position: relative;
   width: 1px;
   min-height: 80%;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
   opacity: 0.7;
 }

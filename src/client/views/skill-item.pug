@@ -2,22 +2,14 @@ div(class=`mdc-card skill-item skill-item__${skill.state}` data-team-name=team.n
   section(class='mdc-card__primary')
     h1(class='mdc-card__title mdc-card__title--large')= skill.title
   section(class='mdc-card__supporting-text')
-    p
-      strong Description
+    span(class='skill-section') Description
     p= skill.why
-  section(class='mdc-card__supporting-text')
-    p
-      strong Implementation
+    span(class='skill-section') Implementation
     p= skill.how
-  section(class='mdc-card__supporting-text')
-    p
-      strong Validation
+    span(class='skill-section') Validation
     p= skill.validation
-  section(class='mdc-card__supporting-text')
-    p
-      strong Links
-    div
-      section(class='mdc-card__actions')
-        each link in skill.links
-          a(class='mdc-card__action' href=link.url)
-            button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-billed-button')= link.title
+  if skill.links.length
+    section(class='mdc-card__actions')
+      each link in skill.links
+        a(class='mdc-card__action' href=link.url)
+          button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-billed-button')= link.title

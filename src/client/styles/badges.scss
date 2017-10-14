@@ -3,14 +3,18 @@
 }
 
 .mdc-card.badge .mdc-list {
-  background-color: $mdc-theme-primary;
+  background: $mdc-theme-primary-dark;
+}
+
+.mdc-card.badge .mdc-list:last-child {
+  margin-top: 1em;
 }
 
 .badge--achieved {
-  color: #2E7D32;
+  color: #43A047;
 }
 
 .badge--unachieved {
-  color: #d50000;
+  color: #E53935;
 
 }
