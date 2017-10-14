@@ -3,27 +3,9 @@
 'use strict';
 const MongoClient = require('mongodb').MongoClient;
 const walk = require('walk');
-const dbUser = process.env['DB_USER'];
-const dbPassword = process.env['DB_PASS'];
-const dbCollection = process.env['DB_COLLECTION'];
-const dbHost = process.env['DB_HOST'] || 'localhost';
-const dbURL = (dbUser && dbPassword) ?
-  `mongodb://${encodeURIComponent(dbUser)}:${encodeURIComponent(dbPassword)}@${dbHost}/${dbCollection}?authMechanism=DEFAULT` :
-  (dbCollection) ? `mongodb://${dbHost}/${dbCollection}` : `mongodb://${dbHost}`;
+const Mongo = require('../src/server/db');
 
-let db;
-let collection;
 let migrationNames = [];
-
-function connectToDB() {
-  return new Promise((resolve, reject) => {
-    MongoClient.connect(dbURL).then((connection) => {
-      db = connection;
-      collection = db.collection('belt');
-      resolve();
-    }).catch((err) => reject(err));
-  });
-}
 
 function readMigrations() {
   return new Promise((resolve, reject) => {
@@ -43,7 +25,8 @@ function readMigrations() {
   });
 }
 
-function runMigrations() {
+async function runMigrations() {
+  const collection = await Mongo.getConnection();
   let migrationPromises = migrationNames.map((migration) => {
     const script = require('./migrations/' + migration);
     if (script.checkDB && script.migrateDB)
@@ -62,11 +45,9 @@ function runMigrations() {
 }
 
 readMigrations()
-  .then(() => connectToDB())
   .then(() => runMigrations())
-  .then(() => db.close())
+  .then(() => Mongo.closeConnection())
   .catch((err) => {
     console.error(err);
-    if (db)
-      db.close();
+    Mongo.closeConnection();
   });
