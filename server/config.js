@@ -1,6 +1,10 @@
+const path = require('path');
+
 const config = {
   server: {
-    httpPort: process.env.PORT || 3000
+    httpPort: process.env.PORT || 3000,
+    publicPath: path.resolve(__dirname, '../public'),
+    views: path.resolve(__dirname, 'views')
   },
   database: {
     host: process.env.DB_HOST || '127.0.0.1:27017',
