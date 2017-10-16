@@ -1,5 +1,5 @@
 const skills = require('./skills');
-const teams = require('../../config/teams.json').teams;
+const teams = require('../config/teams.json').teams;
 const Mongo = require('./db');
 
 async function getTeamGraph(teamName, days) {

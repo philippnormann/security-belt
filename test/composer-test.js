@@ -1,8 +1,8 @@
 const sinon = require('sinon');
 const assert = require('assert');
-const composer = require('../src/server/composer');
-const state = require('../src/server/state');
-const skills = require('../src/server/skills');
+const composer = require('../server/composer');
+const state = require('../server/state');
+const skills = require('../server/skills');
 
 describe('Composer', () => {
   describe('getTeamRepresentation', () => {
