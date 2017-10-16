@@ -13,62 +13,36 @@ const api = require('./routes/api');
 const badges = require('./routes/badges');
 const Mongo = require('./db');
 const config = require('./config');
-
+const middleware = require('./middleware');
 const app = express();
 
-// view engine setup
-app.set('views', config.server.views);
-app.set('view engine', 'pug');
+function bindStatic(app, config) {
+  app.set('views', config.server.views);
+  app.set('view engine', 'pug');
+  app.use(favicon(path.join(config.server.publicPath, 'favicon.ico')));
+  app.use(express.static(config.server.publicPath));
+}
 
-app.use(favicon(path.join(config.server.publicPath, 'favicon.ico')));
-app.use(morgan('combined'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+function bindBase(app) {
+  app.use(morgan('combined'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: false
+  }));
+}
 
-// redirect to https
-app.use(function (req, res, next) {
-  if (process.env.NODE_ENV !== 'production' || req.headers['x-forwarded-proto'] === 'https') {
-    return next();
-  }
-  res.redirect('https://' + req.headers.host + req.url);
-});
+bindBase(app);
+bindStatic(app, config);
 
-//set cross origin header
-app.use('/api', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD');
-  next();
-});
-
-app.use(express.static(config.server.publicPath));
-
+app.use(middleware.httpsRedirect);
 app.use('/', index.router);
 app.use('/teams', teams.router);
 app.use('/skill', skill.router);
 app.use('/leaderboard', leaderboard.router);
-app.use('/api', api.router);
+app.use('/api', middleware.cors, api.router);
 app.use('/badges', badges.router);
-
-// catch 404
-app.use(function (req, res) {
-  res.locals.message = 'Sorry! Nothing here…';
-  res.locals.error = {status: 404};
-  res.status(404).render('error');
-});
-
-// error handler
-app.use(function (err, req, res) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(middleware.notFound);
+app.use(middleware.error);
 
 function startServer(httpPort) {
   app.set('port', httpPort);
