@@ -1,5 +1,6 @@
 const skills = require('./skills');
-const teams = require('../config/teams.json').teams;
+const config = require('./config');
+const teams = require(config.data.teams).teams;
 const Mongo = require('./db');
 
 async function getTeamGraph(teamName, days) {
@@ -155,7 +156,7 @@ function getBadges() {
   const fs = require('fs');
   const yaml = require('js-yaml');
   const glob = require('glob');
-  const badgePath = `${__dirname}/../../config/badges`;
+  const badgePath = config.data.badges;
   return new Promise((resolve, reject) => {
     glob(`${badgePath}/**/*.yaml`, (err, files) => {
       if(err) {

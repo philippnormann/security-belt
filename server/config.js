@@ -12,6 +12,11 @@ const config = {
     collection: process.env.DB_COLLECTION || 'belt',
     user: process.env.DB_USER,
     password: process.env.DB_PASS
+  },
+  data: {
+    skills: path.resolve(__dirname, '../config/skills'),
+    badges: path.resolve(__dirname, '../config/badges'),
+    teams: path.resolve(__dirname, '../config/teams.json')
   }
 };
 

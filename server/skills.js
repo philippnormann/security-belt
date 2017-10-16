@@ -3,6 +3,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const walk = require('walk');
+const config = require('./config');
 
 let skills;
 let fileNames;
@@ -45,7 +46,7 @@ function read(skillsFolder) {
 function get() {
   return new Promise((resolve, reject) => {
     if (skills === undefined)
-      read(path.resolve(__dirname, '../../config/skills')).then((res) =>
+      read(config.data.skills).then((res) =>
         resolve(res)
       ).catch((err) =>
         reject(err)
