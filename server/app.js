@@ -42,7 +42,7 @@ app.use('/api', function(req, res, next) {
   next();
 });
 
-app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', index.router);
 app.use('/teams', teams.router);
