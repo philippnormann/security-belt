@@ -1,7 +1,7 @@
 {
   "name": "security-belt",
   "version": "1.0.0",
-  "license": "GPL-3.0",
+  "license": "Apache 2.0",
   "description": "A framework for improving the IT-Security of your teams through gamification.",
   "keywords": [
     "security",
