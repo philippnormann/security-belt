@@ -10,7 +10,7 @@ const webpackConfig = {
   devtool: isProduction ? 'eval-source-map' : 'source-map',
   entry: {
     app: [
-      path.resolve(__dirname, 'src', 'client', 'js', 'client.js')
+      path.resolve(__dirname, 'app', 'js', 'client.js')
     ]
   },
   output: {
@@ -80,7 +80,7 @@ const webpackConfig = {
         }),
         include: [
           path.resolve(__dirname, 'node_modules'),
-          path.resolve(__dirname, 'src/client')
+          path.resolve(__dirname, 'app')
         ]
       }
     ]

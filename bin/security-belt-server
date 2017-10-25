@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const yargs = require('yargs');
-const securityBelt = require('../src/server/app');
+const securityBelt = require('../server/app');
 
 function startServer(yargs) {
   const { port } = yargs

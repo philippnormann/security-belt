@@ -3,7 +3,7 @@
 'use strict';
 const MongoClient = require('mongodb').MongoClient;
 const walk = require('walk');
-const Mongo = require('../src/server/db');
+const Mongo = require('../server/db');
 
 let migrationNames = [];
 
