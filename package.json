@@ -28,7 +28,7 @@
     "test:nolint": "mocha --reporter spec",
     "test": "npm run lint && npm run test:nolint",
     "migrate": "./scripts/migration-runner.js",
-    "prestart": "npm run build && npm run migrate",
+    "prestart": "npm run migrate",
     "start": "./bin/security-belt-server start",
     "clean": "cd public && ls | grep -Ev 'favicon.ico|logo.svg|logo.png' | xargs rm",
     "prepush": "npm run test",
