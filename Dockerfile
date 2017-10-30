@@ -1,16 +1,16 @@
 FROM node 
 
-ENV SEC_BELT_HOME /usr/local/security-belt
+ENV SEC_BELT_HOME /home/node/security-belt
 ENV NODE_ENV production
 
 WORKDIR $SEC_BELT_HOME
 
-COPY package.json $SEC_BELT_HOME
+COPY . $SEC_BELT_HOME
+
+RUN chown -R node $SEC_BELT_HOME
 
 RUN npm install
 
-COPY . $SEC_BELT_HOME
-
-USER nobody
+USER node
 
 ENTRYPOINT ["npm", "start"]
