@@ -73,6 +73,7 @@ A valid team file should look like this:
 {
   "teams": [
     {
+      "key": "Team 1 Key",
       "name": "Team 1",
       "champion": {
         "name": "Chuck Norris",
@@ -138,7 +139,7 @@ Response:
 }
 ```
 
-### GET `/api/stats/[teamName]?days=[n]`
+### GET `/api/stats/[key]?days=[n]`
 Get skill progress for a specific team over the last n days
 
 Response:
@@ -174,11 +175,12 @@ Response:
 {
   "teams": [
     {
+      "key": "Team Awesome Key",
       "name": "Team Awesome",
       "belt": "white",
       "skills": [
-        { 
-          "name": "secure_sauce", 
+        {
+          "name": "secure_sauce",
           "since": 1498747187
          },
         ...
