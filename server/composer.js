@@ -76,7 +76,8 @@ async function getTeamRepresentation(name) {
   });
 
   const composed = {
-    id: slug(teamInfo.name),
+    id: slug(teamInfo.key),
+    key: teamInfo.key,
     name: teamInfo.name,
     securityChampion: teamInfo.champion,
     belt: teamInfo.belt,

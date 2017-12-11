@@ -12,7 +12,7 @@ block content
             - rankTextColor = 'black'
           else
             - rankTextColor = 'white'
-          a(href=`/teams/${encodeURI(team.name)}` class='mdc-list-item' data-mdc-auto-init='MDCRipple')
+          a(href=`/teams/${encodeURI(team.key)}` class='mdc-list-item' data-mdc-auto-init='MDCRipple')
             span(class=`mdc-list-item__start-detail center ${team.belt}-belt ${rankTextColor}-belt-text`)= rank
             = team.name
             div(class='mdc-list-item__end-detail')

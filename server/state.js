@@ -3,7 +3,7 @@ const config = require('./config');
 const teams = require(config.data.teams).teams;
 const Mongo = require('./db');
 
-async function getTeamGraph(teamName, days) {
+async function getTeamGraph(key, days) {
   const collection = await Mongo.getConnection();
   const res = [];
   for (let i = days-1; i >= 0; i--) {
@@ -12,7 +12,7 @@ async function getTeamGraph(teamName, days) {
     const cursor = await collection.aggregate([
       {
         $match: {
-          _id: teamName
+          _id: key
         }
       },
       {
@@ -45,7 +45,7 @@ function getGraph(days){
   const summedGraph = [];
   const teamGraphs = [];
   teams.forEach((team) => {
-    const teamGraph = getTeamGraph(team.name, days);
+    const teamGraph = getTeamGraph(team.key, days);
     teamGraphs.push(teamGraph);
   });
   return Promise.all(teamGraphs).then((resolvedGraphs) => {
@@ -64,16 +64,17 @@ function getGraph(days){
 function getTeams() {
   let allTeams = [];
   teams.map((team) => {
-    allTeams.push(getTeam(team.name));
+    allTeams.push(getTeam(team.key));
   });
   return Promise.all(allTeams);
 }
 
-async function getTeam(teamName) {
-  const currentSkills = await teamSkills(teamName);
+async function getTeam(key) {
+  const currentSkills = await teamSkills(key);
   const fileNames = await skills.getFileNames();
-  const teamObj = teams.find((team) => team.name == teamName);
+  const teamObj = teams.find((team) => team.key == key);
   const team = {
+    key: teamObj.key,
     name: teamObj.name,
     champion: teamObj.champion,
     belt: belt(currentSkills, fileNames),
@@ -84,55 +85,55 @@ async function getTeam(teamName) {
 }
 
 function getTeamNames() {
-  return teams.map((team) => team.name);
+  return teams.map((team) => team.key);
 }
 
-async function createTeam(teamName) {
+async function createTeam(key) {
   const collection = await Mongo.getConnection();
-  if (getTeamNames().includes(teamName)) {
-    const team = {_id: teamName, skills: []};
+  if (getTeamNames().includes(key)) {
+    const team = {_id: key, skills: []};
     return collection.insertOne(team);
   } else {
     return Promise.reject(Error('Team not found!'));
   }
 }
 
-async function teamSkills(teamName) {
+async function teamSkills(key) {
   const collection = await Mongo.getConnection();
-  const doc = await collection.findOne({ _id: teamName });
+  const doc = await collection.findOne({ _id: key });
   if (doc) {
     return Promise.resolve(doc.skills);
   } else {
-    await createTeam(teamName);
-    return teamSkills(teamName);
+    await createTeam(key);
+    return teamSkills(key);
   }
 }
 
-async function addToSkillSet(teamName, cardName) {
+async function addToSkillSet(key, cardName) {
   const collection = await Mongo.getConnection();
-  const doc = await collection.findOne({_id: teamName, skills: {$elemMatch: {name: cardName}}});
+  const doc = await collection.findOne({_id: key, skills: {$elemMatch: {name: cardName}}});
   if (doc) {
     return Promise.reject(Error('skill is already enabled'));
   }
-  return collection.updateOne({_id: teamName}, {$push: {skills: {name: cardName, since: new Date()}}});
+  return collection.updateOne({_id: key}, {$push: {skills: {name: cardName, since: new Date()}}});
 }
 
-async function removeFromSkillSet(teamName, cardName) {
+async function removeFromSkillSet(key, cardName) {
   const collection = await Mongo.getConnection();
-  return collection.updateOne({_id: teamName}, {$pull: {skills: {name: cardName}}});
+  return collection.updateOne({_id: key}, {$pull: {skills: {name: cardName}}});
 }
 
-function toggleSkill(teamName, cardName) {
+function toggleSkill(key, cardName) {
   return skills.getFlatFileNames().then((res) => {
     if (res.includes(cardName))
-      return Promise.resolve(teamName);
+      return Promise.resolve(key);
     else
       return Promise.reject(Error(cardName + ' Skill not valid!'));
   }).then(teamSkills).then((res) => {
     if (res.find((skill) => skill.name == cardName))
-      return removeFromSkillSet(teamName, cardName);
+      return removeFromSkillSet(key, cardName);
     else
-      return addToSkillSet(teamName, cardName);
+      return addToSkillSet(key, cardName);
   });
 }
 
