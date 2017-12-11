@@ -7,8 +7,12 @@ const skills = require('../server/skills');
 describe('Composer', () => {
   describe('getTeamRepresentation', () => {
     it('should return the right team', async () => {
+      const teamKey = 'Team 1 Key';
+      const teamname = 'Team 1';
+
       sinon.stub(state, 'getTeam').returns({
-        name: 'Team 1',
+        key: teamKey,
+        name: teamname,
         belt: 'white',
         skillCount: 1,
         skills: [
@@ -23,9 +27,9 @@ describe('Composer', () => {
       sinon.stub(state, 'getBadges').returns([
         { id: 'my-badge', title: 'My badge', requiredSkills: ['my-skill'] }
       ]);
-      const teamname = 'Team 1';
+
       const result = await composer.getTeamRepresentation(teamname);
-      assert.equal(result.id, 'team-1');
+      assert.equal(result.id, 'team-1-key');
       assert.equal(result.name, teamname);
       assert.equal(result.belt, 'white');
       assert.equal(result.skillCount, 1);

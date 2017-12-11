@@ -5,7 +5,7 @@ const skills = require('./skills');
 function slug(s) {
   let slg = s;
   slg = slg.toLowerCase();
-  slg = slg.replace(/\s+/, '-');
+  slg = slg.replace(/\s+/g, '-');
   return slg;
 }
 
