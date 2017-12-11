@@ -11,14 +11,14 @@ function capitalize(s){
     });
 }
 
-function toggleSkill(team, skill) {
+function toggleSkill(key, skill) {
   return fetch('/skill/toggle', {
     method: 'post',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({team, skill})
+    body: JSON.stringify({key, skill})
   });
 }
 
@@ -40,10 +40,10 @@ function initSkillActions() {
   skills.forEach(function(skill) {
     skill.addEventListener('click', function(e) {
       const card = e.target.closest(selectors.skillItem);
-      const { skillId, teamName } = card.dataset;
+      const { skillId, key } = card.dataset;
       const skillTitle = skillId;
 
-      toggleSkill(teamName, skillTitle)
+      toggleSkill(key, skillTitle)
         .then(async function(res) {
           const body = await res.json();
           if(res.status === 404) {

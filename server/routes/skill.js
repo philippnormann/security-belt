@@ -6,8 +6,8 @@ const skills = require('../skills');
 
 skills.getFileNames().then((fileNames) => {
   router.post('/toggle', async function (req, res) {
-    state.toggleSkill(req.body.team, req.body.skill).then(() => {
-      return state.teamSkills(req.body.team);
+    state.toggleSkill(req.body.key, req.body.skill).then(() => {
+      return state.teamSkills(req.body.key);
     }).then((teamSkills) => {
       const belt = state.belt(teamSkills, fileNames);
       res.status(200).send({
