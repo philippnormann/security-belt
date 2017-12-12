@@ -1,6 +1,7 @@
 {
   "teams": [
     {
+      "key": "Team 1 Key",
       "name": "Team 1",
       "champion": {
         "name": "Chuck Norris",
@@ -8,6 +9,7 @@
       }
     },
     {
+     "name": "Team 2 Key",
      "name": "Team 2",
      "champion": {
         "name": "Bruce Schneier",
@@ -15,6 +17,7 @@
      }
     },
     {
+     "name": "Operations Key",
      "name": "Operations",
      "champion": {
         "name": "Ernie",
