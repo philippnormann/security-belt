@@ -9,7 +9,7 @@
       }
     },
     {
-     "name": "Team 2 Key",
+     "key": "Team 2 Key",
      "name": "Team 2",
      "champion": {
         "name": "Bruce Schneier",
@@ -17,7 +17,7 @@
      }
     },
     {
-     "name": "Operations Key",
+     "key": "Operations Key",
      "name": "Operations",
      "champion": {
         "name": "Ernie",
