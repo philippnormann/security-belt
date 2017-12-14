@@ -89,3 +89,17 @@ _:-ms-fullscreen, :root .skill-list__item {
   }
 }
 
+_:-ms-lang(x),
+.mdc-layout-grid__inner {
+  margin: 0;
+}
+
+_:-ms-fullscreen, :root .mdc-layout-grid__inner {
+  margin: 0;
+}
+
+@supports (-ms-accelerator:true) {
+  .mdc-layout-grid__inner  {
+    margin: 0;
+  }
+}
