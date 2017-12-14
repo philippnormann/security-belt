@@ -1,6 +1,11 @@
 /* eslint-env browser */
 'use strict';
 
+import 'core-js';
+import 'element-closest';
+import 'whatwg-fetch';
+import 'nodelist-foreach-polyfill';
+
 import '../styles/style.scss';
 
 import './skillFilter';

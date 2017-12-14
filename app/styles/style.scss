@@ -68,3 +68,24 @@ a, u {
   margin-left: 10px;
   opacity: 0.7;
 }
+
+
+_:-ms-lang(x),
+.skill-list__item {
+  width: 100%\9;
+  width: 100%;
+  margin: 0;
+}
+
+_:-ms-fullscreen, :root .skill-list__item {
+  width: 100%;
+  margin: 0;
+}
+
+@supports (-ms-accelerator:true) {
+  .skill-list__item  {
+    width: 100%;
+    margin: 0;
+  }
+}
+

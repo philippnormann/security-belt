@@ -36,13 +36,15 @@ const webpackConfig = {
             loader: 'babel-loader',
             query: {
               presets: packageJson.babel.presets,
+              plugins: packageJson.babel.plugins,
               cacheDirectory: true
             }
           }
         ],
         include: [
           path.resolve(__dirname, 'node_modules'),
-          path.resolve(__dirname, 'assets')
+          path.resolve(__dirname, 'assets'),
+          path.resolve(__dirname, 'app'),
         ]
       },
       {
