@@ -6,12 +6,14 @@ services:
     environment:
       - DB_HOST=belt-mongo
       - NODE_ENV=development
+    volumes:
+        - ./config/:/home/node/security-belt/config/
     entrypoint:
       - 'npm'
       - 'start'
     ports:
       - "3000:3000"
-  belt-mongo:  
+  belt-mongo:
     image: mongo
     container_name: belt-mongo
     volumes:
