@@ -43,6 +43,10 @@ function initSkillActions() {
       const { skillId, key } = card.dataset;
       const skillTitle = skillId;
 
+      if (e.target.classList.contains('mdc-button')){
+         return;
+      }
+
       toggleSkill(key, skillTitle)
         .then(async function(res) {
           const body = await res.json();
