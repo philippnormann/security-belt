@@ -75,12 +75,20 @@ async function getTeamRepresentation(name) {
     return withState;
   });
 
+  const allSkillsWithStateAndBadges = allSkillsWithState.map(skill => {
+    const withBadges = Object.assign({}, skill);
+    withBadges.badges = allBadges
+      .filter(badge => badge.requiredSkills.includes(skill.id))
+      .map(badge => badge.id);
+    return withBadges;
+  });
+
   const composed = {
     id: slug(teamInfo.name),
     name: teamInfo.name,
     securityChampion: teamInfo.champion,
     belt: teamInfo.belt,
-    skills: allSkillsWithState,
+    skills: allSkillsWithStateAndBadges,
     skillCount: teamInfo.skillCount,
     badges: teamBadges
   };

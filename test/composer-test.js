@@ -30,7 +30,7 @@ describe('Composer', () => {
       assert.equal(result.belt, 'white');
       assert.equal(result.skillCount, 1);
       assert.deepEqual(result.skills, [
-        { title: 'My skill', id: 'my-skill', name: 'my-skill', rank: 'yellow', state: 'closed', links: [] }
+        { title: 'My skill', id: 'my-skill', name: 'my-skill', rank: 'yellow', state: 'closed', links: [], badges: ['my-badge'] }
       ]);
       assert.deepEqual(result.badges, [
         {

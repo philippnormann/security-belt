@@ -12,7 +12,7 @@ block content
       section(class='center mdc-layout-grid__cell--span-12 team-info')
         h1(class='mdc-typography--display2')= 'Team ' + team.name
         h2(class='mdc-typography--display1')
-          strong Belt: 
+          strong Belt:
           strong(class=`team-info__belt ${team.belt}-belt-text`)= beltNames[team.belt]
         h3(class='mdc-typography--headline')= 'Security Champion: '
           a(href='mailto:' + team.securityChampion.email)
@@ -21,7 +21,7 @@ block content
         div(class='mdc-layout-grid__inner')
           each badge in  team.badges
             div(class='mdc-layout-grid__cell')
-              a(href="/badges")
+              a(class="badge-select" href=`#badge-${badge.id}` data-badge=badge.id)
                 div(class='mdc-grid-tile__primary')
                   div(class='mdc-grid-tile__primary-content')
                     if badge.isComplete
@@ -46,5 +46,5 @@ block content
   section(class='card-grid mdc-layout-grid')
     div(class='mdc-layout-grid__inner skill-list')
     each skill in team.skills
-      div(class='mdc-layout-grid__cell skill-list__item' data-skill-rank=skill.rank data-skill-id=skill.id)
+      div(class='mdc-layout-grid__cell skill-list__item' data-skill-badges=skill.badges.join(",") data-skill-rank=skill.rank data-skill-id=skill.id)
         include skill-item.pug
