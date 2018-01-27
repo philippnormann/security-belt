@@ -35,7 +35,7 @@ function toggleSkillState(id) {
   }
 }
 
-function initSkillActions() {
+export function initSkillActions() {
   const skills = document.querySelectorAll(selectors.skillItem);
   skills.forEach(function(skill) {
     skill.addEventListener('click', function(e) {
@@ -69,5 +69,3 @@ function initSkillActions() {
     });
   });
 }
-
-initSkillActions();
