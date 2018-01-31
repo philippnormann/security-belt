@@ -12,26 +12,30 @@ block content
       section(class='center mdc-layout-grid__cell--span-12 team-info')
         h1(class='mdc-typography--display2')= 'Team ' + team.name
         h2(class='mdc-typography--display1')
-          strong Belt: 
+          strong Belt:
           strong(class=`team-info__belt ${team.belt}-belt-text`)= beltNames[team.belt]
         h3(class='mdc-typography--headline')= 'Security Champion: '
           a(href='mailto:' + team.securityChampion.email)
             strong= team.securityChampion.name
 
-        div(class='mdc-layout-grid__inner')
-          each badge in  team.badges
-            div(class='mdc-layout-grid__cell')
-              a(href="/badges")
-                div(class='mdc-grid-tile__primary')
-                  div(class='mdc-grid-tile__primary-content')
-                    if badge.isComplete
-                      i(class='material-icons badge--achieved') done
-                    else
-                      i(class='material-icons badge--unachieved') error
-                div(class='mdc-grid-tile__secondary')
-                  span(class='mdc-grid-tile__title')= badge.title
+      div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar mdc-theme--dark')
+        div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back')
+          a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll back button') navigate_before
+        div(class='mdc-tab-bar-scroller__scroll-frame')
+          nav(class='mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs badge-select')
+            each badge in  team.badges
+              a(class="mdc-tab mdc-tab--with-icon-and-text mdc-tab--active " href=`#badge-${badge.id}` data-badge=badge.id)
+                if badge.isComplete
+                  i(class='material-icons badge--achieved') done
+                else
+                  i(class='material-icons badge--unachieved') error
+                span(class="mdc-tab__icon-text")= badge.title
+            span(class='mdc-tab-bar__indicator tab-bar-indicator-marker')
+        div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward')
+          a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll forward button') navigate_next
 
-      div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar')
+
+      div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar mdc-theme--dark')
         div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back')
           a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll back button') navigate_before
         div(class='mdc-tab-bar-scroller__scroll-frame')
@@ -39,12 +43,12 @@ block content
             each beltColor in beltKeys
               if beltColor !== 'white'
                 a(data-rank=beltColor class=`${beltColor}-belt ${nextBelt == beltColor ? 'mdc-tab--active' : ''} mdc-tab rank-select__tab` href=`#${beltColor}`)= beltNames[beltColor]
-            span(class='mdc-tab-bar__indicator')
+            span(class='mdc-tab-bar__indicator tab-bar-indicator-marker')
         div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward')
           a(class='mdc-tab-bar-scroller__indicator__inner material-icons' href='#' aria-label='scroll forward button') navigate_next
 
   section(class='card-grid mdc-layout-grid')
     div(class='mdc-layout-grid__inner skill-list')
     each skill in team.skills
-      div(class='mdc-layout-grid__cell skill-list__item' data-skill-rank=skill.rank data-skill-id=skill.id)
+      div(class='mdc-layout-grid__cell skill-list__item' data-skill-badges=skill.badges.join(",") data-skill-rank=skill.rank data-skill-id=skill.id)
         include skill-item.pug
