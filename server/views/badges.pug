@@ -9,21 +9,20 @@ block content
           each badge in badges
             div(class='mdc-card badge')
               section(class='mdc-card__primary')
-                h1(class='mdc-card__title mdc-card__title--large')= badge.title
+                h1(class='mdc-card__title mdc-typography--headline')= badge.title
               section(class='mdc-card__supporting-text')
                 span(class='skill-section') Description
                 p= badge.description
                 ul(class='mdc-list')
                   each skill in badge.requiredSkills
-                    li(class='mdc-list-item')= skill.title
+                    li(class='mdc-list-item' data-mdc-auto-init='MDCRipple')= skill.title
               section(class='mdc-card__supporting-text')
                 span(class='skill-section') Team List
                 ul(class='mdc-list')
                   each team in badge.teams
-                      li(class=`mdc-list-item`)
-                        a(href=`/teams/${team.teamName}`)
+                    a(href=`/teams/${team.teamName}` class=`mdc-list-item` data-mdc-auto-init='MDCRipple')
                           if team.hasBadge
-                            i(class='mdc-list-item__start-detail material-icons') done
+                            i(class='mdc-list-item__graphic material-icons') done
                           else
-                            i(class='mdc-list-item__start-detail material-icons') error
-                          span= team.teamName
+                            i(class='mdc-list-item__graphic material-icons') error
+                          =team.teamName

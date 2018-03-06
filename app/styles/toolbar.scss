@@ -2,10 +2,20 @@
   text-decoration: none;
 }
 
-.mdc-tab-bar-scroller__indicator {		
-  color: rgba(254,254,254,0.75);		
-}		
-		
-.mdc-tab-bar-scroller__indicator:hover {		
-  color: rgba(254,254,254,1);		
+.mdc-toolbar__title {
+  padding: 8px;
+}
+
+.toolbar-nav .mdc-toolbar__section--align-end {
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+}
+
+.mdc-tab-bar__indicator{
+  background: $text-color;
+}
+
+.mdc-ripple-upgraded::before, .mdc-ripple-upgraded::after {
+  background-color: hsla(0,0%,100%,.33) !important;
 }

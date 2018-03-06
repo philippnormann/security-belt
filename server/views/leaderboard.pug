@@ -13,9 +13,9 @@ block content
           else
             - rankTextColor = 'white'
           a(href=`/teams/${encodeURI(team.name)}` class='mdc-list-item' data-mdc-auto-init='MDCRipple')
-            span(class=`mdc-list-item__start-detail center ${team.belt}-belt ${rankTextColor}-belt-text`)= rank
+            span(class=`mdc-list-item__graphic center ${team.belt}-belt ${rankTextColor}-belt-text`)= rank
             = team.name
-            div(class='mdc-list-item__end-detail')
+            div(class='mdc-list-item__meta')
               span= `${team.badges.completed} / ${team.badges.total} Badges`
               span(class='divider__vertical')
               span= team.skillCount

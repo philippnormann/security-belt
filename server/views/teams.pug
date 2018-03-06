@@ -12,4 +12,4 @@ block content
             a(href=`/teams/${encodeURI(team.name)}`)
               div(data-mdc-auto-init='MDCRipple' class=`mdc-card ${team.belt}-belt`)
                 section(class='mdc-card__primary center')
-                  h1(class=`mdc-card__title mdc-card__title--large ${team.belt == 'white' ? 'black-belt-text' : 'white-belt-text'}`)= team.name
+                  h1(class=`mdc-card__title mdc-typography--headline ${team.belt == 'white' ? 'black-belt-text' : 'white-belt-text'}`)= team.name

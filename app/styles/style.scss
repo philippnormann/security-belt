@@ -16,6 +16,8 @@ $mdc-theme-background: #263238;
 @import "~@material/ripple/mdc-ripple";
 @import '~roboto-fontface/css/roboto/roboto-fontface';
 
+$text-color: #FAFAFA;
+
 @import 'icon-sizes';
 @import 'belts';
 @import 'buttons';
@@ -24,8 +26,6 @@ $mdc-theme-background: #263238;
 @import 'card-grid';
 @import 'leaderboard';
 @import 'skills';
-
-$text-color: #FAFAFA;
 
 body, a, p, h1, h2, h3, h4, .mdc-card__title, .skill-section {
   color: $text-color;
@@ -45,7 +45,7 @@ body, a, p, h1, h2, h3, h4, .mdc-card__title, .skill-section {
 }
 
 .page__content {
-  margin-top: 82.78px;
+  margin-top: 83px;
 }
 
 .logo {

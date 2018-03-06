@@ -6,6 +6,10 @@
   background: $mdc-theme-primary-dark;
 }
 
+.mdc-card.badge {
+  margin-bottom: 1em;
+}
+
 .mdc-card.badge .mdc-list:last-child {
   margin-top: 1em;
 }
