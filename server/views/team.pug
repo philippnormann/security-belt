@@ -4,7 +4,10 @@ block content
 
   - beltNames = {white: 'White', yellow: 'Yellow', orange: 'Orange', green: 'Green', blue: 'Blue', brown: 'Brown', black:'Black'}
   - beltKeys = Object.keys(beltNames)
-  - nextBelt = beltKeys[beltKeys.indexOf(team.belt)+1];
+  if beltKeys.indexOf(team.belt) === beltKeys.length-1
+    - nextBelt = 'yellow'
+  else
+    - nextBelt = beltKeys[beltKeys.indexOf(team.belt) + 1];
 
   div(class='mdc-layout-grid team-info')
     div(class='mdc-layout-grid__inner')
@@ -15,8 +18,8 @@ block content
           strong='Belt: '
           strong(class=`team-info__belt ${team.belt}-belt-text`)= beltNames[team.belt]
         h3(class='mdc-typography--headline')= 'Security Champion: '
-          a(href='mailto:' + team.securityChampion.email)
-            strong= team.securityChampion.name
+        a(href='mailto:' + team.securityChampion.email)
+          strong= team.securityChampion.name
 
       div(data-mdc-auto-init='MDCTabBarScroller' class='mdc-tab-bar-scroller mdc-layout-grid__cell--span-12 belt-toolbar mdc-theme--dark')
         div(class='mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back')
