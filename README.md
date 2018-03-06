@@ -6,7 +6,7 @@
 [![Heroku](http://heroku-badge.herokuapp.com/?app=angularjs-crypto&style=flat&svg=1)](https://security-belt.herokuapp.com/)
 
 A framework for improving the IT-Security of your teams through gamification.
-It allows teams to self-asses their security level and rewards them with security belts (from yellow through black). It also ranks the teams by the amount of aquired skills.
+It allows teams to self-asses their security level and rewards them with security belts (from yellow through black) and topic specific badges. It also ranks the teams by the amount of aquired skills.
 
 ![screencast](screencast.gif)
 ### [**View demo!**](https://security-belt.herokuapp.com/)
@@ -18,37 +18,43 @@ It allows teams to self-asses their security level and rewards them with securit
 git clone https://github.com/otto-de/security-belt.git
 cd security-belt
 ```
-### Building
-```bash
-npm install
-npm test
-npm run build
-```
-For changes to the clients `.js` and `.scss` files to take effect, the static assets need to be rebuilt.
-
-A watch target is included for this purpose:
-```bash
-npm run build:dev
-```
 ### Prerequisites
-You will need a mongoDB for the teams. The database will be automatically seeded once the app is running.
+A mongoDB for storing the progress of the teams is required. The database is automatically seeded once the app is running.
 
 ### Docker-Compose
-You can use the included docker-compose file, which launches a mongo and a node container for the application. It also mounts the `./data/db` folder as a volume for the database.
+The included docker-compose file can be used to launch a mongoDB and a node container running the belt application. It also mounts the `./data/db` folder as a volume for the database.
 ```
+docker-compose build
 docker-compose up
 ```
 ### Development Setup
-You can also start a mongoDB container without a volume like this:
+For development purposes a mongoDB container can be started without a volume:
 ```bash
 docker run -d --name belt-mongo -p 27017:27017 mongo
+```
+This is better suited for development since the app container doesn't have to be rebuilt after every change.
+
+Afterwards you can launch the application:
+```bash
 npm install
-npm test
 npm start
 ```
-This is better suited for development since you don't have to rebuild the app container every time.
+Optionally a webpack watcher can be launched in a seperate shell to dynamically recompile the client assets:
+```bash
+npm build:dev
+```
+
+### Testing
+All the tests for the application can be executed using the test target:
+```bash
+npm test
+```
+
 
 ## Environment Variables
+
+### Application port:
+- `PORT`, defaults to 3000
 
 ### Databse connection:
 - `DB_USER`
@@ -78,8 +84,7 @@ A valid team file should look like this:
         "name": "Chuck Norris",
         "email": "chuck.norris@example.com"
       }
-    },
-    ...
+    }
   ]
 }
 ```
@@ -180,12 +185,10 @@ Response:
         { 
           "name": "secure_sauce", 
           "since": 1498747187
-         },
-        ...
+         }
       ],
       "skillCount": 1
-    },
-  ...
+    }
   ]
 }
 ```
