@@ -11,10 +11,6 @@ const selectors = {
 
 function displayCards(predicate) {
   document.querySelectorAll(selectors.skillCard).forEach(function(card) {
-    if(predicate === 'all') { // FIXME: dirty hack, is this even necessary?
-      card.style.display = 'block';
-      return;
-    }
     if(predicate(card.dataset)) {
       card.style.display = 'block';
     } else  {
@@ -34,8 +30,8 @@ export function initTabbing() {
         }
         tab.classList.toggle('mdc-tab--active');
 
-        document.querySelector('.rank-select .tab-bar-indicator-marker').classList.add("mdc-tab-bar__indicator");
-        document.querySelector('.badge-select .tab-bar-indicator-marker').classList.remove("mdc-tab-bar__indicator");
+        document.querySelector('.rank-select .tab-bar-indicator-marker').classList.add('mdc-tab-bar__indicator');
+        document.querySelector('.badge-select .tab-bar-indicator-marker').classList.remove('mdc-tab-bar__indicator');
       });
     });
 
@@ -46,8 +42,8 @@ export function initTabbing() {
           elem = elem.parentNode;
         }
         displayCards(cardData => cardData.skillBadges.split(',').includes(elem.dataset.badge));
-        document.querySelector('.rank-select .tab-bar-indicator-marker').classList.remove("mdc-tab-bar__indicator");
-        document.querySelector('.badge-select .tab-bar-indicator-marker').classList.add("mdc-tab-bar__indicator");
+        document.querySelector('.rank-select .tab-bar-indicator-marker').classList.remove('mdc-tab-bar__indicator');
+        document.querySelector('.badge-select .tab-bar-indicator-marker').classList.add('mdc-tab-bar__indicator');
       });
     });
 
@@ -55,7 +51,7 @@ export function initTabbing() {
     displayCards(cardData => cardData.skillRank === activeRank);
     window.location.hash = activeRank;
 
-    document.querySelector('.badge-select .tab-bar-indicator-marker').classList.remove("mdc-tab-bar__indicator");
+    document.querySelector('.badge-select .tab-bar-indicator-marker').classList.remove('mdc-tab-bar__indicator');
   }
 }
 
