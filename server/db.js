@@ -12,6 +12,7 @@ function getMongoUri({ host, database, user, password }) {
  * Singleton for storing the connection
  */
 function Mongo() {
+  let conn = null;
   let db = null;
   let collection = null;
 
@@ -20,19 +21,20 @@ function Mongo() {
       return collection;
     }
 
-    db = await MongoClient.connect(getMongoUri(config.database));
+    conn = await MongoClient.connect(getMongoUri(config.database));
+    db = conn.db(config.database.database);
     collection = db.collection(config.database.collection);
     return collection;
   }
 
   async function closeConnection() {
-    if (db)
-      await db.close();
+    if (conn)
+      await conn.close();
   }
 
   return {
-    getConnection, 
-    closeConnection    
+    getConnection,
+    closeConnection
   };
 }
 

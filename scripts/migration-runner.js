@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 'use strict';
-const MongoClient = require('mongodb').MongoClient;
 const walk = require('walk');
 const Mongo = require('../server/db');
 

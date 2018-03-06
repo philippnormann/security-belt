@@ -16,7 +16,10 @@ before(async () => {
   const dbStub = {
     collection: sinon.stub().returns(collectionStub)
   };
-  sinon.stub(MongoClient, 'connect').resolves(dbStub);
+  const connStub = {
+    db: sinon.stub().returns(dbStub)
+  };
+  sinon.stub(MongoClient, 'connect').resolves(connStub);
   await db.getConnection();
 });
 
@@ -29,7 +32,7 @@ describe('State', () => {
         skills: []
       });
       return state.teamSkills('Team Awesome').then((skills) => {
-        if (skills.length == 0)
+        if (skills.length === 0)
           return Promise.resolve();
         else
           return Promise.reject();

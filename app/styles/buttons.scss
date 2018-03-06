@@ -1,16 +1,8 @@
 // Buttons
 .mdc-button.secondary-filled-button {
   @include mdc-button-filled-accessible($mdc-theme-secondary);
-
-  @include mdc-theme-dark(".mdc-button") {
-    @include mdc-button-filled-accessible($mdc-theme-secondary);
-  }
 }
 
 .mdc-button.primary-filled-button {
   @include mdc-button-filled-accessible($mdc-theme-primary);
-
-  @include mdc-theme-dark(".mdc-button") {
-    @include mdc-button-filled-accessible($mdc-theme-primary);
-  }
 }

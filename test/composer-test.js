@@ -5,7 +5,7 @@ const state = require('../server/state');
 const skills = require('../server/skills');
 
 describe('Composer', () => {
-  describe('getTeamRepresentation', () => {
+  describe('getTeamRepresentation()', () => {
     it('should return the right team', async () => {
       sinon.stub(state, 'getTeam').returns({
         name: 'Team 1',
