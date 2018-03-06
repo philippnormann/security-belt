@@ -35,7 +35,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@material/auto-init": "0.32.0",
+    "@material/auto-init": "^0.32.0",
     "@material/button": "^0.32.0",
     "@material/card": "^0.32.0",
     "@material/elevation": "^0.28.0",
@@ -45,7 +45,7 @@
     "@material/tabs": "^0.32.0",
     "@material/theme": "^0.30.0",
     "@material/toolbar": "^0.32.0",
-    "@material/typography": "0.28.0",
+    "@material/typography": "^0.28.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
@@ -67,7 +67,7 @@
     "serve-favicon": "^2.4.5",
     "style-loader": "^0.20.2",
     "walk": "^2.3.9",
-    "webpack": "^3.11.0",
+    "webpack": "3.11.0",
     "ajv": "^6.2.1"
   },
   "devDependencies": {
@@ -75,7 +75,7 @@
     "husky": "^0.14.3",
     "mocha": "^5.0.2",
     "sinon": "^4.4.2",
-    "yaml-lint": "1.2.1"
+    "yaml-lint": "^1.2.1"
   },
   "babel": {
     "presets": [
