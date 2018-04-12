@@ -1,4 +1,5 @@
 version: "2"
+
 services:
   belt-server:
     build: ./
@@ -6,15 +7,18 @@ services:
     environment:
       - DB_HOST=belt-mongo
       - NODE_ENV=development
-    entrypoint:
-      - 'npm'
-      - 'start'
     ports:
       - "3000:3000"
-  belt-mongo:  
+    mem_limit: 250mb
+    memswap_limit: 250mb
+    depends_on:
+      - belt-mongo
+  belt-mongo:
     image: mongo
     container_name: belt-mongo
     volumes:
       - ./data/db:/data/db
     ports:
       - "27017:27017"
+    mem_limit: 250mb
+    memswap_limit: 250mb
