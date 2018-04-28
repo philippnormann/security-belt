@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const morgan = require('morgan');
+const bunyan = require('bunyan');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
@@ -15,6 +15,26 @@ const Mongo = require('./db');
 const config = require('./config');
 const middleware = require('./middleware');
 const app = express();
+const rootLogger = bunyan.createLogger({
+  name: 'securitybelt',
+  level: process.env.SB_LOG_LEVEL || 'info',
+  streams: [
+    { stream: process.stdout, level: 'info' }
+  ],
+  serializers: bunyan.stdSerializers
+});
+
+if(process.env.SB_LOG_FILE) {
+  rootLogger.addStream({ path: path.resolve(process.env.SB_LOG_FILE) });
+}
+
+function requestLoggerMiddleware(req, res, next) {
+  if(!req.logger) {
+    req.logger = rootLogger.child({ label: 'http' });
+  }
+  req.logger.info({ req });
+  next();
+}
 
 function bindStatic(app, config) {
   app.set('views', config.server.views);
@@ -24,7 +44,7 @@ function bindStatic(app, config) {
 }
 
 function bindBase(app) {
-  app.use(morgan('combined'));
+  app.use(requestLoggerMiddleware);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: false
@@ -51,11 +71,11 @@ function startServer(httpPort) {
   app.listen(app.get('port'), async () => {
     try {
       await Mongo.getConnection();
-      console.log('Connected to mongoDB');
+      rootLogger.info('Connected to mongoDB');
     } catch(ex) {
-      console.log('Failed to connect to mongoDB: ', ex);
+      rootLogger.error({ err, msg: `failed to connect to database` });
     }
-    console.log(`Server listening on http://localhost:${httpPort}`);
+    rootLogger.info(`Server listening on http://localhost:${httpPort}`);
   });
 }
 

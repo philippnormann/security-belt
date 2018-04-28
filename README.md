@@ -53,6 +53,11 @@ npm test
 
 ## Environment Variables
 
+### Logging
+
+- `SB_LOG_LEVEL` one of `debug`, `info` (default), `warn`, `error`
+- `SB_LOG_FILE` if set, will log to the given file (disabled by default)
+
 ### Application port:
 - `PORT`, defaults to 3000
 
