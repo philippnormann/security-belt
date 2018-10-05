@@ -12,4 +12,4 @@ div(class=`mdc-card skill-item skill-item__${skill.state}` data-team-name=team.n
     section(class='mdc-card__actions')
       each link in skill.links
         a(class='mdc-card__action' href=link.url)
-          button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-billed-button')= link.title
+          button(data-mdc-auto-init='MDCRipple' class='mdc-button mdc-button--raised primary-filled-button')= link.title
