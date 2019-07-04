@@ -21,7 +21,7 @@ function Mongo() {
       return collection;
     }
 
-    conn = await MongoClient.connect(getMongoUri(config.database));
+    conn = await MongoClient.connect(getMongoUri(config.database), { useNewUrlParser: true });
     db = conn.db(config.database.database);
     collection = db.collection(config.database.collection);
     return collection;
