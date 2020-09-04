@@ -57,7 +57,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "js-yaml": "^3.11.0",
-    "mongodb": "^3.0.4",
+    "mongodb": "^3.1.13",
     "node-sass": "^4.7.2",
     "normalize.css": "^8.0.0",
     "pug": "^2.0.0",
