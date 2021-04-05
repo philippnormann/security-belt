@@ -114,6 +114,22 @@ links:
   - Some link in Confluence: https://confluence/?id=234
 ```
 
+### Badges
+
+You can enable badges by adding `.yaml` files in the folder `config/badges`.
+
+The badges serve as a further motivation and relate to different skills that have been achieved.
+
+```yaml
+title: Always up to date
+description: Your dependencies and software is always up to date.
+requiredSkills:
+  - dependency_checks
+  - software_updates
+```
+
+### Lint the skills
+
 To check if all skills are valid YAML syntax, you can use the included lint target:
 ```bash
 npm run lint:yaml
@@ -187,8 +203,8 @@ Response:
       "name": "Team Awesome",
       "belt": "white",
       "skills": [
-        { 
-          "name": "secure_sauce", 
+        {
+          "name": "secure_sauce",
           "since": 1498747187
          }
       ],
