@@ -1,4 +1,4 @@
-FROM node:11
+FROM node:12
 
 ENV SEC_BELT_HOME /home/node/security-belt
 ENV NODE_ENV production

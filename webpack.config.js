@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const packageJson = require('./package');
 const isProduction = process.env.NODE_ENV === 'production';
@@ -34,7 +34,7 @@ const webpackConfig = {
         use: [
           {
             loader: 'babel-loader',
-            query: {
+            options: {
               presets: packageJson.babel.presets,
               cacheDirectory: true
             }
@@ -58,26 +58,27 @@ const webpackConfig = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-            },
-            {
-              loader: 'resolve-url-loader'
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true,
-                includePaths: [
-                  path.resolve(__dirname, 'node_modules/')
-                ]
-              }
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          }
+          ,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'resolve-url-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: [
+                path.resolve(__dirname, 'node_modules/')
+              ]
             }
-          ],
-        }),
+          }
+        ],
         include: [
           path.resolve(__dirname, 'node_modules'),
           path.resolve(__dirname, 'app')
@@ -86,10 +87,8 @@ const webpackConfig = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'style.css',
-      disable: false,
-      allChunks: true
     }),
     new webpack.NoEmitOnErrorsPlugin()
   ]
