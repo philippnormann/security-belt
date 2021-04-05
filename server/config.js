@@ -11,7 +11,8 @@ const config = {
     database: process.env.DB_NAME || 'security-belt',
     collection: process.env.DB_COLLECTION || 'belt',
     user: process.env.DB_USER,
-    password: process.env.DB_PASS
+    password: process.env.DB_PASS,
+    uri: process.env.DB_URI
   },
   data: {
     skills: path.resolve(__dirname, '../config/skills'),
