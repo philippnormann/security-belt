@@ -58,7 +58,7 @@
     "file-loader": "^1.1.11",
     "js-yaml": "^3.13.1",
     "mongodb": "^3.2.7",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "pug": "^2.0.4",
     "request": "^2.88.0",
