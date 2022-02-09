@@ -58,7 +58,7 @@
     "js-yaml": "^3.14.1",
     "mini-css-extract-plugin": "^1.4.0",
     "mongodb": "^3.6.5",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "pug": "^3.0.2",
     "request": "^2.88.2",
